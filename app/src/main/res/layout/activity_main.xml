@@ -26,19 +26,44 @@
             android:layout_gravity="center_horizontal"
             android:textColor="@color/dark_purple"/>
 
-
-        <EditText
-            android:id="@+id/loggingBox"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1"
-            android:hint="@string/logging_hint"
-            android:textColor="@color/black"
             android:background="@drawable/logging_background"
-            android:fontFamily="@font/poppins_semi_bold"
-            android:gravity="top"
-            android:padding="25dp"
-            android:inputType="textMultiLine"/>
+
+            android:orientation="vertical">
+
+            <EditText
+                android:id="@+id/loggingBox"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="0.8"
+                android:fontFamily="@font/poppins_semi_bold"
+                android:gravity="top"
+                android:hint="@string/logging_hint"
+                android:inputType="textMultiLine"
+                android:padding="25dp"
+                android:textColor="@color/black"
+                android:background="@null"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="0.1"
+                android:gravity="center"
+                android:paddingBottom="3dp">
+                <ImageButton
+                    android:layout_width="50dp"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/mic_icon"
+                    >
+
+                </ImageButton>
+            </LinearLayout>
+
+        </LinearLayout>
+
 
 
         <Button
