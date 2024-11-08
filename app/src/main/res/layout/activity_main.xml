@@ -139,6 +139,8 @@
                 android:contentDescription="Graph icon"
                 android:src="@drawable/graph"
                 android:scaleType="fitCenter"
+                android:scaleX="0.85"
+                android:scaleY="0.85"
                 android:background="@color/purple"/>
 
             <ImageButton
