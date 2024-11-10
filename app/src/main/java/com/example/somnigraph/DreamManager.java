@@ -60,10 +60,10 @@ public class DreamManager
             Type dreamListType = new TypeToken<ArrayList<Dream>>() {}.getType();
             dreams = gson.fromJson(reader, dreamListType);
             if (dreams == null) {
-                dreams = new ArrayList<>(); // Ensure dreams is initialized if the file is empty
+                dreams = new ArrayList<>(); 
             }
         } catch (Exception e) {
-            // If the file is not found or there's an error, initialize dreams as an empty list
+
             dreams = new ArrayList<>();
             e.printStackTrace();
         }
