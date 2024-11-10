@@ -1,6 +1,7 @@
 package com.example.somnigraph;
 
 import android.app.AlertDialog;
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.Gravity;
@@ -8,20 +9,21 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.EditText;
-import android.widget.HorizontalScrollView;
+import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.Space;
 import android.widget.TextView;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.content.ContextCompat;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 import com.google.android.material.textfield.TextInputEditText;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -38,6 +40,44 @@ public class MainActivity extends AppCompatActivity {
         });
         Button tagAddBtn = (Button) findViewById(R.id.addTagButton);
         tagAddBtn.setOnClickListener(this::onTagPlusBtnClick);
+
+        Button logBtn = (Button) findViewById(R.id.logBtn);
+        logBtn.setOnClickListener(this::createDream);
+
+        setupNavBar();
+    }
+
+    private void setupNavBar()
+    {
+        ImageButton cloudBtn = findViewById(R.id.cloudButton);
+        ImageButton graphBtn = findViewById(R.id.graphButton);
+        ImageButton calendarBtn = findViewById(R.id.calendarButton);
+        
+        cloudBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, WordCloudActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        graphBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Open activity for graph
+                Intent intent = new Intent(MainActivity.this, GraphActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        calendarBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Open activity for calendar
+                Intent intent = new Intent(MainActivity.this, CalendarActivity.class);
+                startActivity(intent);
+            }
+        });
     }
     private void onTagPlusBtnClick(View view) {
         LayoutInflater inflater = getLayoutInflater();
@@ -73,7 +113,6 @@ public class MainActivity extends AppCompatActivity {
         tagLayout.setOrientation(LinearLayout.HORIZONTAL);
         tagLayout.setBackgroundResource(R.drawable.individual_tag_background);
         tagLayout.setGravity(Gravity.CENTER);
-//        tagLayout.setBackgroundColor(lightPurple);
         tagLayout.setPadding(20, 5, 10, 5);
 
 
@@ -105,7 +144,6 @@ public class MainActivity extends AppCompatActivity {
 
 
         tagLayout.addView(tagTextView);
-//        tagLayout.addView(spaceFiller);
         tagLayout.addView(deleteButton);
 
         tagContainer.addView(tagLayout);
@@ -113,4 +151,25 @@ public class MainActivity extends AppCompatActivity {
         dialog.dismiss();
     }
 
+    private void createDream(View view) {
+        TextView dreamTextView = (TextView) findViewById(R.id.loggingBox);
+        String dreamDescription = dreamTextView.getText().toString().trim();
+
+        LinearLayout tagContainer = findViewById(R.id.tagContainer);
+        List<String> tags = new ArrayList<>();
+
+        for (int i = 0; i < tagContainer.getChildCount(); i++) {
+            View tagLayout = tagContainer.getChildAt(i);
+            if (tagLayout instanceof LinearLayout) {
+                TextView tagTextView = (TextView) ((LinearLayout) tagLayout).getChildAt(0);
+                tags.add(tagTextView.getText().toString());
+            }
+        }
+
+        Dream dream = new Dream(tags, dreamDescription);
+        DreamManager.getInstance().addDream(dream);
+
+        dreamTextView.setText("");
+        tagContainer.removeAllViews();
+    }
 }
