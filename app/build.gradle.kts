@@ -6,6 +6,7 @@ android {
     namespace = "com.example.somnigraph"
     compileSdk = 34
 
+
     defaultConfig {
         applicationId = "com.example.somnigraph"
         minSdk = 24
@@ -32,12 +33,14 @@ android {
 }
 
 dependencies {
-
+    implementation(libs.gson)
     implementation(libs.appcompat)
     implementation(libs.material)
     implementation(libs.activity)
     implementation(libs.constraintlayout)
+    implementation(libs.firebase.crashlytics.buildtools)
     testImplementation(libs.junit)
     androidTestImplementation(libs.ext.junit)
     androidTestImplementation(libs.espresso.core)
+
 }

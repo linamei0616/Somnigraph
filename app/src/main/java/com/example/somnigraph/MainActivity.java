@@ -27,9 +27,11 @@ import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
+    DreamManager dreamManager;
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
+        dreamManager = DreamManager.getInstance(this);
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_main);
@@ -167,7 +169,7 @@ public class MainActivity extends AppCompatActivity {
         }
 
         Dream dream = new Dream(tags, dreamDescription);
-        DreamManager.getInstance().addDream(dream);
+        dreamManager.addDream(dream);
 
         dreamTextView.setText("");
         tagContainer.removeAllViews();
