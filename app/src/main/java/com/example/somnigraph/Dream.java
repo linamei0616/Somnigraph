@@ -1,0 +1,21 @@
+package com.example.somnigraph;
+
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+
+public class Dream
+{
+    public ArrayList<String> tags;
+    public String dreamDescription;
+    public Date loggedDate;
+
+    public Dream(List<String> tags, String dreamDescription)
+    {
+        this.dreamDescription = dreamDescription;
+        this.tags = new ArrayList<>(tags);
+        this.loggedDate = new Date();
+    }
+
+
+}

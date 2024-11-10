@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">Somnigraph</string>
     <string name="logging_hint">Start logging… ✏️</string>
+    <string name="somnigraph">Somnigraph</string>
 </resources>

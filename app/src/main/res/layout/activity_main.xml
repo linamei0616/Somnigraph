@@ -19,9 +19,9 @@
             android:gravity="center"
             android:layout_height="0dp"
             android:layout_weight="0.3"
-            android:text="Somnigraph"
+            android:text="@string/somnigraph"
             android:fontFamily="@font/anta"
-            android:textSize="40dp"
+            android:textSize="40sp"
             android:textStyle="bold"
             android:layout_gravity="center_horizontal"
             android:textColor="@color/dark_purple"/>
@@ -54,6 +54,7 @@
                 android:gravity="center"
                 android:paddingBottom="3dp">
                 <ImageButton
+                    android:id="@+id/micBtn"
                     android:layout_width="50dp"
                     android:layout_height="wrap_content"
                     android:background="@drawable/mic_icon"
@@ -82,20 +83,29 @@
             android:orientation="horizontal"
             android:layout_marginTop="16dp"
             android:gravity="center">
+
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="70dp"
                 android:background="@drawable/tag_background"
                 android:gravity="center"
                 android:paddingLeft="10dp"
                 android:paddingRight="10dp">
+
                 <HorizontalScrollView
                     android:id="@+id/tagInput"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight=".9"
                     android:hint="Tags"
-                    android:padding="10dp"/>
+                    android:padding="10dp">
+
+                    <LinearLayout
+                        android:id="@+id/tagContainer"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:orientation="horizontal" />
+                </HorizontalScrollView>
 
                 <Button
                     android:id="@+id/addTagButton"
@@ -103,8 +113,8 @@
                     android:layout_height="35dp"
                     android:layout_gravity="center"
                     android:layout_weight="0.1"
-                    android:gravity="center"
-                    android:background="@drawable/plus" />
+                    android:background="@drawable/plus"
+                    android:gravity="center" />
             </LinearLayout>
 
 
