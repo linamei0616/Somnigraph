@@ -12,6 +12,10 @@ import java.io.OutputStreamWriter;
 import java.lang.reflect.Type;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Map;
 
 public class DreamManager
 {
@@ -68,4 +72,51 @@ public class DreamManager
             e.printStackTrace();
         }
     }
+
+    public List<String> getSortedTagsByFrequency() {
+        Map<String, Integer> tagFrequency = new HashMap<>();
+
+        for (Dream dream : dreams) {
+            for (String tag : dream.tags) {
+                tagFrequency.put(tag, tagFrequency.getOrDefault(tag, 0) + 1);
+            }
+        }
+
+        List<Map.Entry<String, Integer>> tagList = new ArrayList<>(tagFrequency.entrySet());
+        tagList.sort((entry1, entry2) -> entry2.getValue().compareTo(entry1.getValue()));
+
+        List<String> sortedTags = new ArrayList<>();
+        for (Map.Entry<String, Integer> entry : tagList) {
+            sortedTags.add(entry.getKey());
+        }
+        return sortedTags;
+    }
+
+    public List<Dream> getDreamsWithTag(String tag)
+    {
+        List<Dream> dreamsWithTag = new ArrayList<>();
+        for (Dream dream : dreams) {
+            if(dream.tags.contains(tag))
+            {
+                dreamsWithTag.add(dream);
+            }
+        }
+        return dreamsWithTag;
+    }
+
+    public Map<String, List<Dream>> getTagToDreamMap()
+    {
+        Map<String, List<Dream>> tagToDream = new HashMap<>();
+        for(Dream dream : dreams)
+        {
+            for(String tag : dream.tags)
+            {
+                List<Dream> dreamsContainingTag =  tagToDream.getOrDefault(tag, new ArrayList<Dream>());
+                tagToDream.put(tag, dreamsContainingTag);
+            }
+        }
+        return tagToDream;
+    }
+
+
 }
