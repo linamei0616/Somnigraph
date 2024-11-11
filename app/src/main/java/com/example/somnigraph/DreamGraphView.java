@@ -20,6 +20,8 @@ public class DreamGraphView extends View {
     private Map<String, List<Dream>> dreamGroups;
     private Map<String, RectF> groupBounds;
     private Map<Dream, PointF> dreamPositions;
+    private int requiredWidth;
+    private int requiredHeight;
     private Paint circlePaint;
     private Paint textPaint;
     private Paint dreamDotPaint;
@@ -31,10 +33,12 @@ public class DreamGraphView extends View {
     private Dream selectedDream;
     private boolean isFirstPopup = true;
     private FrameLayout overlayContainer;
-    public DreamGraphView(Context context) {
-        super(context);
-        init();
-    }
+
+    private int rows;
+    private int cols;
+    private float cellWidth;
+    private float cellHeight;
+
 
     public DreamGraphView(Context context, AttributeSet attrs) {
         super(context, attrs);
@@ -51,16 +55,16 @@ public class DreamGraphView extends View {
         circlePaint.setColor(0xFFE6E6FA); // Light purple
         circlePaint.setAntiAlias(true);
 
-        textPaint = new Paint();
-        textPaint.setColor(0xFF4B0082); // Dark purple
-        textPaint.setTextSize(40f);
-        textPaint.setTextAlign(Paint.Align.CENTER);
-        textPaint.setAntiAlias(true);
-
         dreamDotPaint = new Paint();
         dreamDotPaint.setStyle(Paint.Style.FILL);
         dreamDotPaint.setColor(0xFF000000); // Black
         dreamDotPaint.setAntiAlias(true);
+
+        textPaint = new Paint();
+        textPaint.setColor(0xFF4B0082); // Dark purple
+        textPaint.setTextSize(36f); // Slightly smaller text size
+        textPaint.setTextAlign(Paint.Align.CENTER);
+        textPaint.setAntiAlias(true);
     }
 
     private void initializePopup() {
@@ -78,7 +82,6 @@ public class DreamGraphView extends View {
         // Make popup clicks not dismiss the overlay
         popupView.setOnClickListener(v -> {});
     }
-
     private void showPopup(Dream dream, float x, float y) {
         if (overlayContainer == null) return;
 
@@ -205,38 +208,7 @@ public class DreamGraphView extends View {
         invalidate();
     }
 
-    private void calculateGroupPositions() {
-        groupBounds.clear();
-        dreamPositions.clear();
-        if (dreamGroups.isEmpty()) return;
 
-        int groupCount = dreamGroups.size();
-        float centerX = getWidth() / 2f;
-        float centerY = getHeight() / 2f;
-        float radius = Math.min(centerX, centerY) - circleRadius - padding;
-
-        int index = 0;
-        for (Map.Entry<String, List<Dream>> entry : dreamGroups.entrySet()) {
-            String tag = entry.getKey();
-            List<Dream> dreams = entry.getValue();
-
-            float angle = (float) (2 * Math.PI * index / groupCount);
-            float x = centerX + radius * (float) Math.cos(angle);
-            float y = centerY + radius * (float) Math.sin(angle);
-
-            RectF bounds = new RectF(
-                    x - circleRadius,
-                    y - circleRadius,
-                    x + circleRadius,
-                    y + circleRadius
-            );
-            groupBounds.put(tag, bounds);
-
-            // Calculate positions for dream dots
-            calculateDreamDotPositions(dreams, bounds);
-            index++;
-        }
-    }
 
     private void calculateDreamDotPositions(List<Dream> dreams, RectF bounds) {
         int dotsCount = dreams.size();
@@ -265,8 +237,8 @@ public class DreamGraphView extends View {
             // Draw circle
             canvas.drawCircle(bounds.centerX(), bounds.centerY(), circleRadius, circlePaint);
 
-            // Draw tag name
-            canvas.drawText(tag, bounds.centerX(), bounds.centerY() - circleRadius - 20, textPaint);
+            // Draw tag name with text wrapping
+            drawWrappedText(canvas, tag, bounds.centerX(), bounds.centerY() - circleRadius - 20);
         }
 
         // Draw dream dots
@@ -285,11 +257,94 @@ public class DreamGraphView extends View {
         }
     }
 
+    private void drawWrappedText(Canvas canvas, String text, float centerX, float y) {
+        // Calculate maximum width for text
+        float maxWidth = cellWidth * 0.8f; // Use 80% of cell width
+
+        // Split text into words
+        String[] words = text.split(" ");
+        StringBuilder line = new StringBuilder();
+        float lineY = y;
+
+        for (String word : words) {
+            float currentWidth = textPaint.measureText(line + " " + word);
+            if (currentWidth > maxWidth && line.length() > 0) {
+                // Draw current line and start new one
+                canvas.drawText(line.toString(), centerX, lineY, textPaint);
+                line = new StringBuilder(word);
+                lineY += textPaint.getTextSize() * 1.2f; // Add line spacing
+            } else {
+                if (line.length() > 0) line.append(" ");
+                line.append(word);
+            }
+        }
+        // Draw final line
+        if (line.length() > 0) {
+            canvas.drawText(line.toString(), centerX, lineY, textPaint);
+        }
+    }
+    private void calculateGridDimensions() {
+        if (dreamGroups.isEmpty()) return;
+
+        int groupCount = dreamGroups.size();
+        // Calculate optimal number of columns based on available width
+        float availableWidth = getWidth() - (padding * 2);
+        float minSpaceNeeded = (circleRadius * 2) + padding;
+        cols = Math.max(1, (int)(availableWidth / minSpaceNeeded));
+
+        // Calculate number of rows needed
+        rows = (int) Math.ceil((float) groupCount / cols);
+
+        // Calculate cell dimensions with equal spacing
+        cellWidth = (getWidth() - (padding * 2)) / cols;
+        cellHeight = (getHeight() - (padding * 2)) / rows;
+
+        // Adjust circle radius if needed to fit cells
+        float maxRadius = Math.min(cellWidth, cellHeight) * 0.4f; // Use 40% of cell size
+        circleRadius = Math.min(circleRadius, maxRadius);
+    }
+
+    private void calculateGroupPositions() {
+        groupBounds.clear();
+        dreamPositions.clear();
+        if (dreamGroups.isEmpty()) return;
+
+        calculateGridDimensions();
+
+        int index = 0;
+        for (Map.Entry<String, List<Dream>> entry : dreamGroups.entrySet()) {
+            String tag = entry.getKey();
+            List<Dream> dreams = entry.getValue();
+
+            // Calculate row and column for this group
+            int row = index / cols;
+            int col = index % cols;
+
+            // Calculate center position for this circle
+            float centerX = padding + (cellWidth * col) + (cellWidth / 2);
+            float centerY = padding + (cellHeight * row) + (cellHeight / 2);
+
+            RectF bounds = new RectF(
+                    centerX - circleRadius,
+                    centerY - circleRadius,
+                    centerX + circleRadius,
+                    centerY + circleRadius
+            );
+            groupBounds.put(tag, bounds);
+
+            // Calculate positions for dream dots
+            calculateDreamDotPositions(dreams, bounds);
+            index++;
+        }
+    }
+
     @Override
     protected void onSizeChanged(int w, int h, int oldw, int oldh) {
         super.onSizeChanged(w, h, oldw, oldh);
         calculateGroupPositions();
     }
+
+
 
     private static class PointF {
         float x, y;
