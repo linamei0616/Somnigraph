@@ -3,21 +3,21 @@ package com.example.somnigraph;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.TypedValue;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.Spinner;
-import android.widget.SpinnerAdapter;
+import androidx.viewpager2.widget.MarginPageTransformer;
+import androidx.viewpager2.widget.ViewPager2;
 
-import androidx.activity.EdgeToEdge;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
-
+import com.google.android.material.tabs.TabLayout;
+import com.google.android.material.tabs.TabLayoutMediator;
+import android.util.TypedValue;
+import androidx.viewpager2.widget.ViewPager2;
+import androidx.viewpager2.widget.MarginPageTransformer;
 import java.util.ArrayList;
-import java.util.Dictionary;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
@@ -25,6 +25,8 @@ import java.util.Map;
 
 public class GraphActivity extends Activity {
     private final int minOccurrenceCountForCategory = 3;
+    private DreamGroupAdapter pagerAdapter;
+    private ViewPager2 dreamPager;
     private DreamGraphView dreamGraphView;
     DreamManager dreamManager;
     @Override
@@ -33,8 +35,6 @@ public class GraphActivity extends Activity {
         dreamManager = DreamManager.getInstance(this);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_graph);
-
-        dreamGraphView = findViewById(R.id.dreamGraphView);
 
         Spinner tagSpinner = (Spinner) findViewById(R.id.connectionSpinner);
 
@@ -55,6 +55,11 @@ public class GraphActivity extends Activity {
         };
         tagSpinner.setOnItemSelectedListener(listener);
         setupNavBar();
+
+        dreamPager = findViewById(R.id.dreamPager);
+        pagerAdapter = new DreamGroupAdapter(this);
+        dreamPager.setAdapter(pagerAdapter);
+        setupPageIndicator();
     }
 
     private void onTagSelected(AdapterView<?> parent, View view, int pos, long id)
@@ -88,7 +93,16 @@ public class GraphActivity extends Activity {
 
     private void generateGraph(Map<String, List<Dream>> dreamsToGraph)
     {
-        dreamGraphView.setDreamGroups(dreamsToGraph);
+        pagerAdapter.setDreamGroups(dreamsToGraph);
+    }
+
+    private void setupPageIndicator() {
+        TabLayout tabLayout = findViewById(R.id.tabDots);
+        new TabLayoutMediator(tabLayout, dreamPager,
+                (tab, position) -> {
+
+                }
+        ).attach();
     }
 
 

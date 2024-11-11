@@ -17,5 +17,24 @@ public class Dream
         this.loggedDate = new Date();
     }
 
+    public String getTitle()
+    {
+        return "Dream";
+    }
+    public String getContent()
+    {
+        return dreamDescription;
+    }
+
+    public String getDate()
+    {
+        return loggedDate.toString();
+    }
+
+
+
+
+
+
 
 }
