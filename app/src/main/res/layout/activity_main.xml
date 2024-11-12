@@ -66,14 +66,13 @@
         </LinearLayout>
 
 
-
         <Button
             android:id="@+id/logBtn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Log"
+            android:layout_gravity="center_horizontal"
             android:fontFamily="@font/poppins_semi_bold"
-            android:layout_gravity="center_horizontal"/>
+            android:text="Log" />
 
 
         <LinearLayout
