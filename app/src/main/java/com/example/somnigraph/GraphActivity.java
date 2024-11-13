@@ -29,6 +29,8 @@ public class GraphActivity extends Activity {
     private ViewPager2 dreamPager;
     private DreamGraphView dreamGraphView;
     DreamManager dreamManager;
+    private Spinner tagSpinner;
+
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
@@ -36,24 +38,22 @@ public class GraphActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_graph);
         Common.setupNavBar(this);
-        Spinner tagSpinner = (Spinner) findViewById(R.id.connectionSpinner);
 
-        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, dreamManager.getSortedTagsByFrequency());
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        tagSpinner.setAdapter(adapter);
-        AdapterView.OnItemSelectedListener listener = new AdapterView.OnItemSelectedListener() {
+        // Register the specific listener for GraphActivity
+        Common.registerSpinnerListener(GraphActivity.class, new AdapterView.OnItemSelectedListener() {
             @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id)
-            {
-                onTagSelected(parent,view,position,id);
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                onTagSelected(parent, view, position, id);
             }
 
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
                 // Do nothing
             }
-        };
-        tagSpinner.setOnItemSelectedListener(listener);
+        });
+
+        Spinner tagSpinner = findViewById(R.id.connectionSpinner);
+        Common.setupSpinner(this, tagSpinner, dreamManager);
 
         dreamPager = findViewById(R.id.dreamPager);
         pagerAdapter = new DreamGroupAdapter(this);

@@ -3,14 +3,12 @@ package com.example.somnigraph;
 import android.os.Bundle;
 import android.widget.AdapterView;
 import android.widget.FrameLayout;
-import android.widget.ArrayAdapter;
-
-import com.example.somnigraph.Common.*;
 import androidx.appcompat.app.AppCompatActivity;
 import com.jolenechong.wordcloud.WordCloud;
 import java.util.ArrayList;
 import java.util.List;
 import android.widget.Spinner;
+
 
 public class WordCloudActivity extends AppCompatActivity {
     private DreamManager dreamManager;
@@ -23,12 +21,9 @@ public class WordCloudActivity extends AppCompatActivity {
         // initialize DreamManager instance
         dreamManager = DreamManager.getInstance(this);
 
-        // set up Spinner with tags from DreamManager
+        // Set up Spinner with tags from DreamManager using Common setup
         Spinner tagSpinner = findViewById(R.id.connectionSpinner);
-        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, dreamManager.getSortedTagsByFrequency());
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        // common  to setup the spinner
-
+        Common.setupSpinner(this, tagSpinner, dreamManager);
 
         // initialize WordCloud
         WordCloud wordCloudView = new WordCloud(this, null);
