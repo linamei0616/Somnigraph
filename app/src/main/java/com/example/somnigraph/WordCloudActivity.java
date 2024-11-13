@@ -19,7 +19,7 @@ public class WordCloudActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_word_cloud);
-
+        Common.setupNavBar(this);
         // initialize DreamManager instance
         dreamManager = DreamManager.getInstance(this);
 
