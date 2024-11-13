@@ -22,7 +22,7 @@
             android:layout_toLeftOf="@id/sort_by_spinner"
             android:layout_weight="1"
             android:fontFamily="@font/anta"
-            android:text="hi"
+            android:text="day view"
             android:textColor="@color/black"
             android:textSize="30sp"
             android:textStyle="bold" />
