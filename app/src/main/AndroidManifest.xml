@@ -22,7 +22,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".WordCloudActivity"
+            android:name=".WordCloud.WordCloudActivity"
             android:exported="true">
         </activity>
         <activity

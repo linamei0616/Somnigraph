@@ -8,6 +8,9 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ImageButton;
 import android.widget.Spinner;
+
+import com.example.somnigraph.WordCloud.WordCloudActivity;
+
 import java.util.HashMap;
 import java.util.Map;
 
@@ -20,7 +23,10 @@ public class Common {
                                                AdapterView.OnItemSelectedListener listener) {
         spinnerListeners.put(activityClass, listener);
     }
-    // modified setupSpinner to use activity-specific listeners
+    /**
+     * setupSpinner is a helper function that sets up the spinner for dropdown tags
+     *
+     */
     public static void setupSpinner(Activity activity, Spinner spinner, DreamManager dreamManager) {
         // Setup adapter as before
         ArrayAdapter<String> adapter = new ArrayAdapter<>(
@@ -41,11 +47,15 @@ public class Common {
         spinner.setSelection(0);
     }
 
-    // helper method to set up the navigation bar
+    /**
+     * setupNavBar is a helper function that sets up the navigation bar throughout all screens
+     *
+     */
     public static void setupNavBar(Activity activity) {
         ImageButton cloudBtn = activity.findViewById(R.id.cloudButton);
         ImageButton pencilBtn = activity.findViewById(R.id.pencilButton);
         ImageButton calendarBtn = activity.findViewById(R.id.calendarButton);
+        ImageButton graphBtn = activity.findViewById(R.id.graphButton);  // Add this line
 
         cloudBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -70,6 +80,14 @@ public class Common {
                 activity.startActivity(intent);
             }
         });
-    }
 
+        // Add click listener for graph button
+        graphBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(activity, GraphActivity.class);  // Make sure GraphActivity exists
+                activity.startActivity(intent);
+            }
+        });
+    }
 }
