@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/light_purple"
+    android:orientation="vertical"
+    tools:context=".MainActivity">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="41dp"
+        android:layout_weight=".1"
+        android:orientation="horizontal"
+        android:padding="4dp">
+
+        <TextView
+            android:layout_width="227dp"
+            android:layout_height="wrap_content"
+            android:layout_toLeftOf="@id/sort_by_spinner"
+            android:layout_weight="1"
+            android:fontFamily="@font/anta"
+            android:text="WEEK: Oct 20 - Oct 27"
+            android:textColor="@color/black"
+            android:textSize="30sp"
+            android:textStyle="bold" />
+
+        <Spinner
+            android:id="@+id/sort_by_spinner"
+            android:layout_width="wrap_content"
+            android:layout_height="87dp"
+            android:layout_weight=".5"
+            android:entries="@array/sort_by_options"
+            android:fontFamily="@font/anta"
+            android:textSize="40sp"
+            android:textStyle="bold" />
+
+    </LinearLayout>
+
+    <!-- Bottom navigation buttons -->
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="0.9"
+        android:orientation="horizontal">
+
+        <TableLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+        </TableLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="0.1"
+        android:gravity="bottom">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:background="@color/purple">
+
+            <ImageButton
+                android:id="@+id/pencilButton"
+                android:layout_width="0dp"
+                android:layout_weight="0.25"
+                android:layout_height="wrap_content"
+                android:contentDescription="Pencil icon"
+                android:src="@drawable/pencil"
+                android:scaleType="fitCenter"
+                android:background="@color/purple"
+                android:padding="10dp"/>
+
+            <ImageButton
+                android:id="@+id/cloudButton"
+                android:layout_width="0dp"
+                android:layout_weight="0.25"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:contentDescription="Cloud icon"
+                android:src="@drawable/cloud"
+                android:scaleType="fitCenter"
+                android:background="@color/purple"/>
+
+
+            <ImageButton
+                android:id="@+id/graphButton"
+                android:layout_width="0dp"
+                android:layout_weight="0.25"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:contentDescription="Graph icon"
+                android:src="@drawable/graph"
+                android:scaleType="fitCenter"
+                android:scaleX="0.85"
+                android:scaleY="0.85"
+                android:background="@color/purple"/>
+
+            <ImageButton
+                android:id="@+id/calendarButton"
+                android:layout_width="0dp"
+                android:layout_weight="0.25"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:contentDescription="Calendar icon"
+                android:src="@drawable/calendar"
+                android:scaleType="fitCenter"
+                android:scaleX="0.85"
+                android:scaleY="0.85"
+                android:background="@color/purple"/>
+        </LinearLayout>
+    </LinearLayout>
+</LinearLayout>
