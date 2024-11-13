@@ -4,17 +4,41 @@ package com.example.somnigraph;
 import android.app.Activity;
 import android.content.Intent;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ImageButton;
 import android.widget.Spinner;
+import java.util.HashMap;
+import java.util.Map;
 
 public class Common {
-    // set up the Spinner with tags
+    // map to store activity-specific listeners
+    private static final Map<Class<? extends Activity>, AdapterView.OnItemSelectedListener> spinnerListeners = new HashMap<>();
+
+    // method to register a custom listener for an activity
+    public static void registerSpinnerListener(Class<? extends Activity> activityClass,
+                                               AdapterView.OnItemSelectedListener listener) {
+        spinnerListeners.put(activityClass, listener);
+    }
+    // modified setupSpinner to use activity-specific listeners
     public static void setupSpinner(Activity activity, Spinner spinner, DreamManager dreamManager) {
-        // populate the Spinner with sorted tags from the DreamManager
-        ArrayAdapter<String> adapter = new ArrayAdapter<>(activity, android.R.layout.simple_spinner_item, dreamManager.getSortedTagsByFrequency());
+        // Setup adapter as before
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(
+                activity,
+                android.R.layout.simple_spinner_item,
+                dreamManager.getSortedTagsByFrequency()
+        );
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(adapter);
+
+        // Get the specific listener for this activity
+        AdapterView.OnItemSelectedListener listener = spinnerListeners.get(activity.getClass());
+        if (listener != null) {
+            spinner.setOnItemSelectedListener(listener);
+        }
+
+        // Reset spinner to no selection
+        spinner.setSelection(0);
     }
 
     // helper method to set up the navigation bar
