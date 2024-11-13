@@ -35,7 +35,7 @@ public class GraphActivity extends Activity {
         dreamManager = DreamManager.getInstance(this);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_graph);
-
+        Common.setupNavBar(this);
         Spinner tagSpinner = (Spinner) findViewById(R.id.connectionSpinner);
 
         ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, dreamManager.getSortedTagsByFrequency());
@@ -54,7 +54,6 @@ public class GraphActivity extends Activity {
             }
         };
         tagSpinner.setOnItemSelectedListener(listener);
-        setupNavBar();
 
         dreamPager = findViewById(R.id.dreamPager);
         pagerAdapter = new DreamGroupAdapter(this);
@@ -106,38 +105,4 @@ public class GraphActivity extends Activity {
     }
 
 
-
-
-    private void setupNavBar()
-    {
-        ImageButton cloudBtn = findViewById(R.id.cloudButton);
-        ImageButton pencilBtn = findViewById(R.id.pencilButton);
-        ImageButton calendarBtn = findViewById(R.id.calendarButton);
-
-        cloudBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(GraphActivity.this, WordCloudActivity.class);
-                startActivity(intent);
-            }
-        });
-
-        pencilBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // Open activity for graph
-                Intent intent = new Intent(GraphActivity.this, MainActivity.class);
-                startActivity(intent);
-            }
-        });
-
-        calendarBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // Open activity for calendar
-                Intent intent = new Intent(GraphActivity.this, CalendarActivity.class);
-                startActivity(intent);
-            }
-        });
-    }
 }
