@@ -22,6 +22,7 @@
             android:layout_weight="0.9"
             android:orientation="vertical">
 
+<!--            Dream Connections Header -->
             <TextView
                 android:id="@+id/titleText"
                 android:layout_width="match_parent"
@@ -34,7 +35,7 @@
                 android:textColor="@color/dark_purple"
                 android:textSize="40sp"
                 android:textStyle="bold" />
-
+<!-- Drop Down -->
             <Spinner
                 android:id="@+id/connectionSpinner"
                 android:layout_width="wrap_content"
@@ -43,7 +44,7 @@
                 android:layout_gravity="center"
                 android:background="@drawable/spinner_background"
                 android:layout_marginBottom="20dp"/>
-
+<!-- Main Content -->
             <androidx.viewpager2.widget.ViewPager2
                 android:id="@+id/dreamPager"
                 android:layout_width="match_parent"
@@ -72,6 +73,7 @@
                 android:orientation="horizontal"
                 android:background="@color/purple">
 
+<!--            Navigation Bar -->
                 <ImageButton
                     android:id="@+id/pencilButton"
                     android:layout_width="0dp"

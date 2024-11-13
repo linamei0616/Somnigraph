@@ -14,7 +14,39 @@
         android:layout_weight="0.9"
         android:orientation="vertical">
 
+        <!-- Word Cloud Header -->
+        <TextView
+            android:id="@+id/titleText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:gravity="center"
+            android:text="Word Cloud"
+            android:textColor="@color/dark_purple"
+            android:textSize="40sp"
+            android:textStyle="bold"
+            android:fontFamily="@font/anta"
+            android:padding="10dp" />
+
+        <!-- Drop Down Spinner -->
+        <Spinner
+            android:id="@+id/connectionSpinner"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:background="@drawable/spinner_background"
+            android:layout_marginBottom="20dp" />
+
+        <!--        Word Cloud Contents -->
+        <FrameLayout
+            android:id="@+id/wordCloudView"
+            android:layout_width="match_parent"
+            android:layout_height="300dp"
+            android:layout_margin="20dp"
+            android:layout_gravity="center" />
+
     </LinearLayout>
+<!--  Bottom Navigation Bar   -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"

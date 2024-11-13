@@ -9,7 +9,7 @@ android {
 
     defaultConfig {
         applicationId = "com.example.somnigraph"
-        minSdk = 24
+        minSdk = 26
         targetSdk = 34
         versionCode = 1
         versionName = "1.0"
@@ -43,5 +43,10 @@ dependencies {
     testImplementation(libs.junit)
     androidTestImplementation(libs.ext.junit)
     androidTestImplementation(libs.espresso.core)
-
+    // word cloud
+    implementation("com.github.jolenechong:androidWordCloud:1.0.0") {
+        // Exclude JAXB modules if there are conflicts
+        exclude(group="com.sun.xml.bind", module="jaxb-core")
+        exclude(group="com.sun.xml.bind", module="jaxb-impl")
+    }
 }

@@ -3,6 +3,7 @@
 package com.example.somnigraph;
 import android.app.Activity;
 import android.content.Intent;
+import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ImageButton;
 import android.widget.Spinner;
@@ -22,9 +23,29 @@ public class Common {
         ImageButton pencilBtn = activity.findViewById(R.id.pencilButton);
         ImageButton calendarBtn = activity.findViewById(R.id.calendarButton);
 
-        // click listeners for the buttons
-        cloudBtn.setOnClickListener(v -> activity.startActivity(new Intent(activity, WordCloudActivity.class)));
-        pencilBtn.setOnClickListener(v -> activity.startActivity(new Intent(activity, MainActivity.class)));
-        calendarBtn.setOnClickListener(v -> activity.startActivity(new Intent(activity, CalendarActivity.class)));
+        cloudBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(activity, WordCloudActivity.class);
+                activity.startActivity(intent);
+            }
+        });
+
+        pencilBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(activity, MainActivity.class);
+                activity.startActivity(intent);
+            }
+        });
+
+        calendarBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(activity, CalendarActivity.class);
+                activity.startActivity(intent);
+            }
+        });
     }
+
 }
