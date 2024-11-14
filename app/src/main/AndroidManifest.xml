@@ -13,6 +13,10 @@
         android:theme="@style/Theme.Somnigraph"
         tools:targetApi="31">
         <activity
+            android:name=".CalendarWeekActivity"
+            android:exported="false"
+            android:theme="@style/Theme.Somnigraph" />
+        <activity
             android:name=".MainActivity"
             android:exported="true">
             <intent-filter>
@@ -23,16 +27,13 @@
         </activity>
         <activity
             android:name=".WordCloudActivity"
-            android:exported="true">
-        </activity>
+            android:exported="true"></activity>
         <activity
             android:name=".GraphActivity"
-            android:exported="true">
-        </activity>
-        <activity
-            android:name=".CalendarActivity"
-            android:exported="true">
-        </activity>
+            android:exported="true"></activity>
+        <activity android:name=".CalendarDayActivity" />
+        <activity android:name=".CalendarMonthActivity" />
+        <activity android:name=".CalendarTimeLineActivity" />
     </application>
 
 </manifest>
