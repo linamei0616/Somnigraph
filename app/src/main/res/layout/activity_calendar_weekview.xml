@@ -6,68 +6,235 @@
     android:layout_height="match_parent"
     android:background="@color/light_purple"
     android:orientation="vertical"
+    android:padding="16dp"
     tools:context=".MainActivity">
 
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="41dp"
-        android:layout_weight=".1"
+        android:layout_height="0dp"
+        android:layout_weight=".2"
         android:orientation="horizontal"
-        android:padding="4dp">
+        android:padding="16dp">
 
         <TextView
             android:layout_width="227dp"
             android:layout_height="wrap_content"
             android:layout_toLeftOf="@id/sort_by_spinner"
-            android:layout_weight="1"
+            android:layout_weight=".7"
             android:fontFamily="@font/anta"
             android:text="WEEK: Oct 20 - Oct 27"
             android:textColor="@color/black"
-            android:textSize="30sp"
+            android:textSize="20sp"
             android:textStyle="bold" />
 
         <Spinner
             android:id="@+id/sort_by_spinner"
             android:layout_width="wrap_content"
             android:layout_height="87dp"
-            android:layout_weight=".5"
+            android:layout_weight=".3"
+            android:padding="16dp"
             android:entries="@array/sort_by_options"
             android:fontFamily="@font/anta"
-            android:textSize="40sp"
             android:textStyle="bold" />
+
 
     </LinearLayout>
 
-    <!-- Bottom navigation buttons -->
+    <TableLayout
+        android:layout_width="match_parent"
+        android:layout_height="16dp"
+        android:layout_weight=".05"
+        android:background="@color/light_purple"
+        android:padding="5dp"
+        android:stretchColumns="*">
+
+        <!-- Row for Days of the Week -->
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:padding="8dp"
+                android:text="Sun"
+                android:textColor="@color/black"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:padding="8dp"
+                android:text="Mon"
+                android:textColor="@color/black"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:padding="8dp"
+                android:text="Tue"
+                android:textColor="@color/black"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:padding="8dp"
+                android:text="Wed"
+                android:textColor="@color/black"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:padding="8dp"
+                android:text="Thu"
+                android:textColor="@color/black"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:padding="8dp"
+                android:text="Fri"
+                android:textColor="@color/black"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:padding="8dp"
+                android:text="Sat"
+                android:textColor="@color/black"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+        </TableRow>
+    </TableLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_weight="0.9"
-        android:orientation="horizontal">
+        android:layout_height="0dp"
+        android:layout_weight=".55"
+        android:background="@drawable/logging_background"
 
-        <TableLayout
+        android:orientation="vertical">
+
+        <EditText
+            android:id="@+id/loggingBox"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="0dp"
+            android:layout_weight="0.8"
+            android:fontFamily="@font/poppins_semi_bold"
+            android:gravity="top"
+            android:hint="@string/logging_hint"
+            android:inputType="textMultiLine"
+            android:padding="16dp"
+            android:textColor="@color/black"
+            android:background="@null"/>
 
-            <TableRow
-                android:layout_width="match_parent"
-                android:layout_height="match_parent" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="0.1"
+            android:gravity="center"
+            android:paddingBottom="3dp">
+            <ImageButton
+                android:id="@+id/micBtn"
+                android:layout_width="50dp"
+                android:layout_height="wrap_content"
+                android:background="@drawable/mic_icon"
+                >
 
-            <TableRow
-                android:layout_width="match_parent"
-                android:layout_height="match_parent" />
+            </ImageButton>
+        </LinearLayout>
 
-            <TableRow
-                android:layout_width="match_parent"
-                android:layout_height="match_parent" />
-
-            <TableRow
-                android:layout_width="match_parent"
-                android:layout_height="match_parent" />
-        </TableLayout>
     </LinearLayout>
+
+    <Button
+        android:id="@+id/logBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="bottom"
+        android:text="Log"
+        android:fontFamily="@font/poppins_semi_bold"
+        android:layout_gravity="center_horizontal"/>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="0.1"
+        android:orientation="horizontal"
+        android:layout_marginTop="16dp"
+        android:gravity="center">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="70dp"
+            android:background="@drawable/tag_background"
+            android:gravity="center"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp">
+
+            <HorizontalScrollView
+                android:id="@+id/tagInput"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight=".9"
+                android:hint="Tags"
+                android:padding="10dp">
+
+                <LinearLayout
+                    android:id="@+id/tagContainer"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal" />
+            </HorizontalScrollView>
+
+            <Button
+                android:id="@+id/addTagButton"
+                android:layout_width="0dp"
+                android:layout_height="35dp"
+                android:layout_gravity="center"
+                android:layout_weight="0.1"
+                android:background="@drawable/plus"
+                android:gravity="center" />
+        </LinearLayout>
+
+
+
+    </LinearLayout>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Tags"
+        android:gravity="center"
+        android:textColor="@color/black"
+        android:fontFamily="@font/poppins_semi_bold"/>
+
+    <!-- Bottom navigation buttons -->
 
     <LinearLayout
         android:layout_width="match_parent"
