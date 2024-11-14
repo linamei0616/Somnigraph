@@ -26,6 +26,10 @@ public class Dream
         return dreamDescription;
     }
 
+    public String getTagsAsString() {
+        return String.join(", ", tags);
+    }
+
     public String getDate()
     {
         return loggedDate.toString();

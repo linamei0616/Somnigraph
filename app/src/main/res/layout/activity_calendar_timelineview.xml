@@ -8,7 +8,7 @@
     android:orientation="vertical"
     tools:context=".MainActivity">
 
-
+    <!-- Top section (unchanged) -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="41dp"
@@ -36,39 +36,18 @@
             android:fontFamily="@font/anta"
             android:textSize="40sp"
             android:textStyle="bold" />
-
     </LinearLayout>
 
-    <!-- Bottom navigation buttons -->
-
-    <LinearLayout
+    <!-- Middle section with RecyclerView (replacing TableLayout) -->
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/dream_timeline_recycler_view"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
         android:layout_weight="0.9"
-        android:orientation="horizontal">
+        android:scrollbars="vertical"
+        android:padding="8dp" />
 
-        <TableLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-            <TableRow
-                android:layout_width="match_parent"
-                android:layout_height="match_parent" />
-
-            <TableRow
-                android:layout_width="match_parent"
-                android:layout_height="match_parent" />
-
-            <TableRow
-                android:layout_width="match_parent"
-                android:layout_height="match_parent" />
-
-            <TableRow
-                android:layout_width="match_parent"
-                android:layout_height="match_parent" />
-        </TableLayout>
-    </LinearLayout>
-
+    <!-- Bottom navigation section (unchanged) -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
@@ -83,6 +62,7 @@
             android:orientation="horizontal"
             android:background="@color/purple">
 
+            <!-- Bottom buttons unchanged -->
             <ImageButton
                 android:id="@+id/pencilButton"
                 android:layout_width="0dp"
@@ -104,7 +84,6 @@
                 android:src="@drawable/cloud"
                 android:scaleType="fitCenter"
                 android:background="@color/purple"/>
-
 
             <ImageButton
                 android:id="@+id/graphButton"
