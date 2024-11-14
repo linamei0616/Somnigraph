@@ -48,10 +48,4 @@ dependencies {
     testImplementation(libs.junit)
     androidTestImplementation(libs.ext.junit)
     androidTestImplementation(libs.espresso.core)
-    // word cloud
-    implementation("com.github.jolenechong:androidWordCloud:1.0.0") {
-        // Exclude JAXB modules if there are conflicts
-        exclude(group="com.sun.xml.bind", module="jaxb-core")
-        exclude(group="com.sun.xml.bind", module="jaxb-impl")
-    }
 }
