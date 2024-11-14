@@ -76,7 +76,7 @@ public class Common {
         calendarBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(activity, CalendarActivity.class);
+                Intent intent = new Intent(activity, CalendarWeekActivity.class);
                 activity.startActivity(intent);
             }
         });
