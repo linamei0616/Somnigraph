@@ -2,18 +2,15 @@ package com.example.somnigraph;
 
 import android.content.Context;
 
-import com.example.somnigraph.Dream;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
+
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.lang.reflect.Type;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 
@@ -102,6 +99,17 @@ public class DreamManager
             }
         }
         return dreamsWithTag;
+    }
+
+    public Dream getDreamWithDate(String checkDate)
+    {
+        for (Dream dream : dreams) {
+            if(dream.getDate().contains(checkDate))
+            {
+                return dream;
+            }
+        }
+        return null;
     }
 
     public Map<String, List<Dream>> getTagToDreamMap()
