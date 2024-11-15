@@ -4,17 +4,15 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
-
-import java.util.ArrayList;
+import java.util.List;
 
 public class DreamAdapter extends RecyclerView.Adapter<DreamAdapter.DreamViewHolder> {
 
-    private ArrayList<Dream> dreams;
+    private List<Dream> dreams;
 
-    public DreamAdapter(ArrayList<Dream> dreams) {
+    public DreamAdapter(List<Dream> dreams) {
         this.dreams = dreams;
     }
 
@@ -28,9 +26,10 @@ public class DreamAdapter extends RecyclerView.Adapter<DreamAdapter.DreamViewHol
     @Override
     public void onBindViewHolder(@NonNull DreamViewHolder holder, int position) {
         Dream dream = dreams.get(position);
-        holder.titleTextView.setText(dream.getTitle()); // Sets the title as "Dream"
-        holder.descriptionTextView.setText(dream.getContent()); // Use getContent() here
-        holder.tagsTextView.setText(dream.getTagsAsString()); // Assuming you have a method to get tags as string
+        holder.titleTextView.setText(dream.getTitle());
+        holder.dateTextView.setText(dream.getDate()); // Set the date
+        holder.descriptionTextView.setText(dream.getContent());
+        holder.tagsTextView.setText(dream.getTagsAsString());
     }
 
     @Override
@@ -38,12 +37,13 @@ public class DreamAdapter extends RecyclerView.Adapter<DreamAdapter.DreamViewHol
         return dreams.size();
     }
 
-    public static class DreamViewHolder extends RecyclerView.ViewHolder {
-        TextView titleTextView, descriptionTextView, tagsTextView;
+    static class DreamViewHolder extends RecyclerView.ViewHolder {
+        TextView titleTextView, dateTextView, descriptionTextView, tagsTextView;
 
-        public DreamViewHolder(@NonNull View itemView) {
+        DreamViewHolder(View itemView) {
             super(itemView);
             titleTextView = itemView.findViewById(R.id.dream_title);
+            dateTextView = itemView.findViewById(R.id.dream_date); // Initialize dateTextView
             descriptionTextView = itemView.findViewById(R.id.dream_description);
             tagsTextView = itemView.findViewById(R.id.dream_tags);
         }

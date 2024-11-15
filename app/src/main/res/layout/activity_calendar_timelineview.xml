@@ -8,7 +8,6 @@
     android:orientation="vertical"
     tools:context=".MainActivity">
 
-    <!-- Top section (unchanged) -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="41dp"
@@ -38,16 +37,15 @@
             android:textStyle="bold" />
     </LinearLayout>
 
-    <!-- Middle section with RecyclerView (replacing TableLayout) -->
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/dream_timeline_recycler_view"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="0.9"
+        android:layout_weight="1"
+        android:padding="8dp"
         android:scrollbars="vertical"
-        android:padding="8dp" />
+        android:background="@drawable/logging_background" />
 
-    <!-- Bottom navigation section (unchanged) -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
@@ -62,7 +60,6 @@
             android:orientation="horizontal"
             android:background="@color/purple">
 
-            <!-- Bottom buttons unchanged -->
             <ImageButton
                 android:id="@+id/pencilButton"
                 android:layout_width="0dp"
