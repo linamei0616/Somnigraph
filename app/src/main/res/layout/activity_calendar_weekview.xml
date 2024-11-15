@@ -22,6 +22,7 @@
             android:padding="16dp">
 
             <TextView
+                android:id="@+id/weekRangeText"
                 android:layout_width="227dp"
                 android:layout_height="wrap_content"
                 android:layout_toLeftOf="@id/sort_by_spinner"
@@ -136,7 +137,7 @@
                 android:fontFamily="@font/poppins_semi_bold"
                 android:gravity="top"
                 android:padding="16dp"
-                android:text="rahh load dream here"
+                android:text="Click Day to Load Dreams."
                 android:textColor="@color/black" />
 
 
