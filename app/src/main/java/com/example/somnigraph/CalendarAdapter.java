@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.GridLayout;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import androidx.recyclerview.widget.RecyclerView;
 import java.util.ArrayList;
@@ -17,10 +18,12 @@ import java.util.Locale;
 public class CalendarAdapter extends RecyclerView.Adapter<CalendarAdapter.MonthViewHolder> {
     private Context context;
     private List<Calendar> months;
+    private DreamManager dreamManager;
 
-    public CalendarAdapter(Context context, List<Calendar> months) {
+    public CalendarAdapter(Context context, List<Calendar> months, DreamManager dreamManager) {
         this.context = context;
         this.months = months;
+        this.dreamManager = dreamManager;
     }
 
     public Calendar getMonthAtPosition(int position) {
@@ -36,9 +39,7 @@ public class CalendarAdapter extends RecyclerView.Adapter<CalendarAdapter.MonthV
     @Override
     public void onBindViewHolder(MonthViewHolder holder, int position) {
         Calendar month = months.get(position);
-
         holder.monthTitle.setText(getMonthYearString(month));
-
         holder.setupDaysGrid(month);
     }
 
@@ -59,7 +60,6 @@ public class CalendarAdapter extends RecyclerView.Adapter<CalendarAdapter.MonthV
 
         void setupDaysGrid(Calendar month) {
             daysGrid.removeAllViews();
-
             int daysInMonth = month.getActualMaximum(Calendar.DAY_OF_MONTH);
             int firstDayOfWeek = month.get(Calendar.DAY_OF_WEEK) - 1;
 
@@ -74,23 +74,36 @@ public class CalendarAdapter extends RecyclerView.Adapter<CalendarAdapter.MonthV
             }
 
             for (int i = 1; i <= daysInMonth; i++) {
+                // Create a vertical layout for each day cell
+                LinearLayout dayLayout = new LinearLayout(context);
+                dayLayout.setOrientation(LinearLayout.VERTICAL);
+                dayLayout.setGravity(Gravity.CENTER);
+
                 TextView dayView = new TextView(context);
                 dayView.setText(String.valueOf(i));
                 dayView.setGravity(Gravity.CENTER);
                 dayView.setTextSize(14);
-                dayView.setPadding(8, 16, 8, 75);
+
+                TextView emojiView = new TextView(context);
+                emojiView.setGravity(Gravity.CENTER);
+                emojiView.setTextSize(12);
+                Calendar day = (Calendar) month.clone();
+                day.set(Calendar.DAY_OF_MONTH, i);
+                List<String> emojis = dreamManager.getEmojisForDate(day);
+                emojiView.setText(String.join(" ", emojis));
+
                 GridLayout.LayoutParams params = new GridLayout.LayoutParams();
                 params.width = 0;
                 params.height = ViewGroup.LayoutParams.WRAP_CONTENT;
                 params.columnSpec = GridLayout.spec(GridLayout.UNDEFINED, 1f);
-                dayView.setLayoutParams(params);
-                daysGrid.addView(dayView);
+
+                dayLayout.setLayoutParams(params);
+                dayLayout.addView(dayView);
+                dayLayout.addView(emojiView);
+
+                daysGrid.addView(dayLayout);
             }
         }
-
-
-
-
     }
 
     private String getMonthYearString(Calendar calendar) {

@@ -100,4 +100,13 @@
         android:alignmentMode="alignMargins"
         android:padding="4dp"
         android:useDefaultMargins="true" />
+
+    <GridLayout
+        android:id="@+id/emojisGrid"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:columnCount="7"
+        android:alignmentMode="alignMargins"
+        android:padding="4dp"
+        android:useDefaultMargins="true" />
 </LinearLayout>

@@ -26,11 +26,11 @@ public class CalendarMonthActivity extends Activity {
     private LinearLayoutManager layoutManager;
     private CalendarAdapter adapter;
 
-    protected void onCreate(Bundle savedInstanceState)
-    {
+    protected void onCreate(Bundle savedInstanceState) {
         dreamManager = DreamManager.getInstance(this);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_calendar_monthview);
+
         Common.setupNavBar(this);
         setupSpinner();
 
@@ -40,7 +40,7 @@ public class CalendarMonthActivity extends Activity {
         calendarRecyclerView.setLayoutManager(layoutManager);
 
         List<Calendar> months = generateMonths();
-        adapter = new CalendarAdapter(this, months);
+        adapter = new CalendarAdapter(this, months, dreamManager);
         calendarRecyclerView.setAdapter(adapter);
 
         calendarRecyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
@@ -74,10 +74,8 @@ public class CalendarMonthActivity extends Activity {
     }
 
     private void setupSpinner() {
-        // Find the spinner view
         Spinner sortBySpinner = findViewById(R.id.sort_by_spinner);
 
-        // Create an adapter with the array from resources
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(
                 this,
                 R.array.sort_by_options,
@@ -87,12 +85,9 @@ public class CalendarMonthActivity extends Activity {
         sortBySpinner.setAdapter(adapter);
         sortBySpinner.setSelection(2);
 
-        // Set listener for Spinner item selection
         sortBySpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                // Use switch case to navigate based on the selected item
-                Log.d("MainActivity", "dshfhsajfhksahfhksdhfjsdkf");
                 switch (position) {
                     case 0: // Week view
                         Intent weekIntent = new Intent(CalendarMonthActivity.this, CalendarWeekActivity.class);
@@ -110,7 +105,6 @@ public class CalendarMonthActivity extends Activity {
                             startActivity(monthIntent);
                             finish();
                         }
-
                         break;
                     case 3: // Timeline view
                         Intent timelineIntent = new Intent(CalendarMonthActivity.this, CalendarTimeLineActivity.class);
@@ -122,9 +116,7 @@ public class CalendarMonthActivity extends Activity {
 
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
-                // No action needed if nothing is selected
             }
         });
     }
-
 }
