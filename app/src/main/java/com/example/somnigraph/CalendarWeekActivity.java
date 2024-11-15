@@ -7,6 +7,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
+import android.util.Log;
 
 public class CalendarWeekActivity extends Activity {
     DreamManager dreamManager;
@@ -47,16 +48,19 @@ public class CalendarWeekActivity extends Activity {
                         }
                         break;
                     case 1: // Day view
+                        sortBySpinner.setSelection(position);
                         Intent dayIntent = new Intent(CalendarWeekActivity.this, CalendarDayActivity.class);
                         startActivity(dayIntent);
                         finish();
                         break;
                     case 2: // Month view
+                        sortBySpinner.setSelection(position);
                         Intent monthIntent = new Intent(CalendarWeekActivity.this, CalendarMonthActivity.class);
                         startActivity(monthIntent);
                         finish();
                         break;
                     case 3: // Timeline view
+                        sortBySpinner.setSelection(position);
                         Intent timelineIntent = new Intent(CalendarWeekActivity.this, CalendarTimeLineActivity.class);
                         startActivity(timelineIntent);
                         finish();

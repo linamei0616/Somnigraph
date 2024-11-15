@@ -14,8 +14,5 @@ public class CalendarTimeLineActivity extends Activity {
         setContentView(R.layout.activity_calendar_timelineview);
         Common.setupNavBar(this);
         Spinner tagSpinner = (Spinner) findViewById(R.id.sort_by_spinner);
-
-
-
     }
 }
