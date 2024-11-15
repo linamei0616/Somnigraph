@@ -31,6 +31,7 @@ public class CalendarWeekActivity extends Activity {
         Common.setupNavBar(this);
         setupSpinner();
         setupDayButtons();
+        updateWeekRange();
     }
 
     private void setupDayButtons() {
@@ -83,14 +84,33 @@ public class CalendarWeekActivity extends Activity {
         }
     }
 
+    private void updateWeekRange() {
+        TextView weekRangeText = findViewById(R.id.weekRangeText);
+
+        // Get the current date
+        Calendar calendar = Calendar.getInstance();
+
+        // Set to the first day of the current week (Sunday)
+        calendar.set(Calendar.DAY_OF_WEEK, Calendar.SUNDAY);
+        SimpleDateFormat dateFormat = new SimpleDateFormat("MMM d", Locale.getDefault());
+        String weekStart = dateFormat.format(calendar.getTime());
+
+        // Move to the last day of the current week (Saturday)
+        calendar.add(Calendar.DATE, 6);
+        String weekEnd = dateFormat.format(calendar.getTime());
+
+        // Update the TextView with the week range
+        String weekRange = "WEEK: " + weekStart + " - " + weekEnd;
+        weekRangeText.setText(weekRange);
+    }
+
     private void addTagToContainer(LinearLayout tagContainer, String tagText) {
         Context context = tagContainer.getContext();
 
         // Create a new TextView for the tag
         TextView tagView = new TextView(context);
         tagView.setText(tagText);
-        tagView.setTextColor(Color.WHITE);
-        tagView.setBackgroundResource(R.drawable.tag_background); // Ensure you have a background drawable
+        tagView.setTextColor(Color.BLACK);
         tagView.setPadding(16, 8, 16, 8);
         tagView.setGravity(Gravity.CENTER);
         tagView.setTextSize(TypedValue.COMPLEX_UNIT_SP, 14);
