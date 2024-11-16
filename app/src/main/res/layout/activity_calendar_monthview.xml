@@ -6,69 +6,54 @@
     android:layout_height="match_parent"
     android:background="@color/light_purple"
     android:orientation="vertical"
+    android:padding="16dp"
     tools:context=".MainActivity">
 
-
+    <!-- Top section with TextView and Spinner -->
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="41dp"
-        android:layout_weight=".1"
+        android:layout_height="0dp"
+        android:layout_weight=".2"
         android:orientation="horizontal"
-        android:padding="4dp">
+        android:padding="16dp">
 
         <TextView
-            android:layout_width="227dp"
+            android:id="@+id/monthTitleTextView"
+            android:layout_width="200dp"
             android:layout_height="wrap_content"
-            android:layout_toLeftOf="@id/sort_by_spinner"
-            android:layout_weight="1"
             android:fontFamily="@font/anta"
-            android:text="Month: October"
             android:textColor="@color/black"
             android:textSize="30sp"
-            android:textStyle="bold" />
+            android:textStyle="bold"
+            android:ellipsize="end"
+            android:singleLine="true" />
 
         <Spinner
             android:id="@+id/sort_by_spinner"
             android:layout_width="wrap_content"
             android:layout_height="87dp"
-            android:layout_weight=".5"
+            android:layout_weight=".3"
+            android:padding="16dp"
             android:entries="@array/sort_by_options"
             android:fontFamily="@font/anta"
-            android:textSize="40sp"
             android:textStyle="bold" />
-
     </LinearLayout>
-
-    <!-- Bottom navigation buttons -->
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
         android:layout_weight="0.9"
-        android:orientation="horizontal">
+        android:orientation="vertical"
+        android:gravity="center_horizontal"
+        android:padding="16dp">
 
-        <TableLayout
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/calendarRecyclerView"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-            <TableRow
-                android:layout_width="match_parent"
-                android:layout_height="match_parent" />
-
-            <TableRow
-                android:layout_width="match_parent"
-                android:layout_height="match_parent" />
-
-            <TableRow
-                android:layout_width="match_parent"
-                android:layout_height="match_parent" />
-
-            <TableRow
-                android:layout_width="match_parent"
-                android:layout_height="match_parent" />
-        </TableLayout>
+            android:layout_height="match_parent"/>
     </LinearLayout>
 
+    <!-- Bottom navigation buttons -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
@@ -104,7 +89,6 @@
                 android:src="@drawable/cloud"
                 android:scaleType="fitCenter"
                 android:background="@color/purple"/>
-
 
             <ImageButton
                 android:id="@+id/graphButton"

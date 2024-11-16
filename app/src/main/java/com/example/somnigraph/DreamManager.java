@@ -2,19 +2,19 @@ package com.example.somnigraph;
 
 import android.content.Context;
 
-import com.example.somnigraph.Dream;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
+
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.lang.reflect.Type;
 import java.nio.charset.StandardCharsets;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 
 public class DreamManager
@@ -104,6 +104,17 @@ public class DreamManager
         return dreamsWithTag;
     }
 
+    public Dream getDreamWithDate(String checkDate)
+    {
+        for (Dream dream : dreams) {
+            if(dream.getDate().contains(checkDate))
+            {
+                return dream;
+            }
+        }
+        return null;
+    }
+
     public Map<String, List<Dream>> getTagToDreamMap()
     {
         Map<String, List<Dream>> tagToDream = new HashMap<>();
@@ -118,5 +129,22 @@ public class DreamManager
         return tagToDream;
     }
 
+    public List<String> getEmojisForDate(Calendar date) {
+        List<String> emojis = new ArrayList<>();
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());
+        String targetDate = sdf.format(date.getTime());
+
+        for (Dream dream : dreams) {
+            String dreamDate = sdf.format(dream.loggedDate);
+            if (dreamDate.equals(targetDate)) {
+                for (String tag : dream.tags) {
+                    if (tag.matches("[\\p{So}\\p{Cn}]+")) {
+                        emojis.add(tag);
+                    }
+                }
+            }
+        }
+        return emojis;
+    }
 
 }
