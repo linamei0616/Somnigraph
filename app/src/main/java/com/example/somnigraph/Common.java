@@ -3,11 +3,12 @@
 package com.example.somnigraph;
 import android.app.Activity;
 import android.content.Intent;
-import android.view.View;
+import android.view.MenuItem;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.ImageButton;
 import android.widget.Spinner;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.android.material.navigation.NavigationBarView;
 
 import com.example.somnigraph.WordCloud.WordCloudActivity;
 
@@ -52,42 +53,51 @@ public class Common {
      *
      */
     public static void setupNavBar(Activity activity) {
-        ImageButton cloudBtn = activity.findViewById(R.id.cloudButton);
-        ImageButton pencilBtn = activity.findViewById(R.id.pencilButton);
-        ImageButton calendarBtn = activity.findViewById(R.id.calendarButton);
-        ImageButton graphBtn = activity.findViewById(R.id.graphButton);  // Add this line
+        BottomNavigationView navigation = activity.findViewById(R.id.navigation);
 
-        cloudBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(activity, WordCloudActivity.class);
-                activity.startActivity(intent);
-            }
-        });
+        // Highlight the correct menu item based on the current activity
+        if (activity instanceof WordCloudActivity) {
+            navigation.setSelectedItemId(R.id.action_cloud);
+        } else if (activity instanceof MainActivity) {
+            navigation.setSelectedItemId(R.id.action_pencil);
+        } else if (activity instanceof CalendarWeekActivity ||
+                activity instanceof CalendarDayActivity ||
+                activity instanceof CalendarMonthActivity ||
+                activity instanceof CalendarTimeLineActivity) {
+            navigation.setSelectedItemId(R.id.action_calendar);
+        } else if (activity instanceof GraphActivity) {
+            navigation.setSelectedItemId(R.id.action_graph);
+        }
 
-        pencilBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(activity, MainActivity.class);
-                activity.startActivity(intent);
+        // Set the navigation item selected listener
+        navigation.setOnItemSelectedListener(item -> {
+            int itemId = item.getItemId();
+            if (itemId == R.id.action_cloud) {
+                if (!(activity instanceof WordCloudActivity)) { // Prevent reloading the same activity
+                    Intent intent = new Intent(activity, WordCloudActivity.class);
+                    activity.startActivity(intent);
+                    activity.finish();
+                }
+            } else if (itemId == R.id.action_pencil) {
+                if (!(activity instanceof MainActivity)) {
+                    Intent intent = new Intent(activity, MainActivity.class);
+                    activity.startActivity(intent);
+                    activity.finish();
+                }
+            } else if (itemId == R.id.action_calendar) {
+                if (!(activity instanceof CalendarWeekActivity)) {
+                    Intent intent = new Intent(activity, CalendarWeekActivity.class);
+                    activity.startActivity(intent);
+                    activity.finish();
+                }
+            } else if (itemId == R.id.action_graph) {
+                if (!(activity instanceof GraphActivity)) {
+                    Intent intent = new Intent(activity, GraphActivity.class);
+                    activity.startActivity(intent);
+                    activity.finish();
+                }
             }
-        });
-
-        calendarBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(activity, CalendarWeekActivity.class);
-                activity.startActivity(intent);
-            }
-        });
-
-        // Add click listener for graph button
-        graphBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(activity, GraphActivity.class);  // Make sure GraphActivity exists
-                activity.startActivity(intent);
-            }
+            return true;
         });
     }
 }

@@ -15,7 +15,6 @@ import android.widget.LinearLayout;
 import android.widget.Space;
 import android.widget.TextView;
 
-import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
@@ -38,7 +37,6 @@ public class MainActivity extends AppCompatActivity {
     {
         dreamManager = DreamManager.getInstance(this);
         super.onCreate(savedInstanceState);
-        EdgeToEdge.enable(this);
         setContentView(R.layout.activity_main);
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
@@ -51,40 +49,7 @@ public class MainActivity extends AppCompatActivity {
         Button logBtn = (Button) findViewById(R.id.logBtn);
         logBtn.setOnClickListener(this::createDream);
 
-        setupNavBar();
-    }
-
-    private void setupNavBar()
-    {
-        ImageButton cloudBtn = findViewById(R.id.cloudButton);
-        ImageButton graphBtn = findViewById(R.id.graphButton);
-        ImageButton calendarBtn = findViewById(R.id.calendarButton);
-        
-        cloudBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, WordCloudActivity.class);
-                startActivity(intent);
-            }
-        });
-
-        graphBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // Open activity for graph
-                Intent intent = new Intent(MainActivity.this, GraphActivity.class);
-                startActivity(intent);
-            }
-        });
-
-        calendarBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // Open activity for calendar
-                Intent intent = new Intent(MainActivity.this, CalendarWeekActivity.class);
-                startActivity(intent);
-            }
-        });
+        Common.setupNavBar(this);
     }
     private void onTagPlusBtnClick(View view) {
         LayoutInflater inflater = getLayoutInflater();
