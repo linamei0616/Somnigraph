@@ -4,7 +4,7 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/light_purple"
+    android:background="@color/white"
     android:orientation="vertical"
     tools:context=".MainActivity">
 
@@ -21,7 +21,10 @@
             android:layout_toLeftOf="@id/sort_by_spinner"
             android:layout_weight="1"
             android:fontFamily="@font/anta"
+            android:paddingStart="16dp"
+            android:layout_gravity="center_vertical"
             android:text="timeline"
+            android:gravity="center_vertical"
             android:textColor="@color/black"
             android:textSize="30sp"
             android:textStyle="bold" />
@@ -30,6 +33,7 @@
             android:id="@+id/sort_by_spinner"
             android:layout_width="wrap_content"
             android:layout_height="87dp"
+            android:layout_gravity="center_vertical"
             android:layout_weight=".5"
             android:entries="@array/sort_by_options"
             android:fontFamily="@font/anta"
@@ -44,7 +48,7 @@
         android:layout_weight="1"
         android:padding="8dp"
         android:scrollbars="vertical"
-        android:background="@drawable/logging_background" />
+        android:background="@color/white" />
 
     <!-- Bottom Navigation Bar -->
     <include
