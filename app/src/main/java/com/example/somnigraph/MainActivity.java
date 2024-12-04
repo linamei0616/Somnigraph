@@ -10,6 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.Space;
@@ -29,8 +30,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Calendar;
 
-public class MainActivity extends AppCompatActivity {
-
+public class MainActivity extends AppCompatActivity
+{
     DreamManager dreamManager;
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -127,6 +128,9 @@ public class MainActivity extends AppCompatActivity {
         TextView dreamTextView = (TextView) findViewById(R.id.loggingBox);
         String dreamDescription = dreamTextView.getText().toString().trim();
 
+        EditText dreamTitleView = (EditText) findViewById(R.id.titleBox);
+        String dreamTitle = dreamTextView.getText().toString().trim();
+
         LinearLayout tagContainer = findViewById(R.id.tagContainer);
         List<String> tags = new ArrayList<>();
 
@@ -138,7 +142,7 @@ public class MainActivity extends AppCompatActivity {
             }
         }
 
-        Dream dream = new Dream(tags, dreamDescription);
+        Dream dream = new Dream(tags, dreamDescription, dreamTitle);
         dreamManager.addDream(dream);
 
         dreamTextView.setText("");
