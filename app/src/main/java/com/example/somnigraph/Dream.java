@@ -9,6 +9,7 @@ public class Dream
     public ArrayList<String> tags;
     public String dreamDescription;
     public Date loggedDate;
+    public String title = "default title";
 
     public Dream(List<String> tags, String dreamDescription)
     {
@@ -17,9 +18,17 @@ public class Dream
         this.loggedDate = new Date();
     }
 
+    public Dream(List<String> tags, String dreamDescription, String title)
+    {
+        this.dreamDescription = dreamDescription;
+        this.tags = new ArrayList<>(tags);
+        this.loggedDate = new Date();
+        this.title = title;
+    }
+
     public String getTitle()
     {
-        return "Dream";
+        return title;
     }
     public String getContent()
     {
@@ -34,11 +43,4 @@ public class Dream
     {
         return loggedDate.toString();
     }
-
-
-
-
-
-
-
 }
