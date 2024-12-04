@@ -12,7 +12,9 @@ import com.google.android.material.navigation.NavigationBarView;
 
 import com.example.somnigraph.WordCloud.WordCloudActivity;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class Common {
@@ -29,11 +31,21 @@ public class Common {
      *
      */
     public static void setupSpinner(Activity activity, Spinner spinner, DreamManager dreamManager) {
-        // Setup adapter as before
+        // Filter tags to exclude those that would result in an empty word map
+        List<String> validTags = new ArrayList<>();
+        for (String tag : dreamManager.getSortedTagsByFrequency()) {
+            List<Dream> dreams = dreamManager.getDreamsWithTag(tag);
+            Map<String, Integer> wordFrequency = new WordCloudActivity().processDreamDescriptions(dreams);
+            if (!wordFrequency.isEmpty()) {
+                validTags.add(tag);
+            }
+        }
+
+        // Setup adapter with filtered tags
         ArrayAdapter<String> adapter = new ArrayAdapter<>(
                 activity,
                 android.R.layout.simple_spinner_item,
-                dreamManager.getSortedTagsByFrequency()
+                validTags
         );
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(adapter);
@@ -45,7 +57,9 @@ public class Common {
         }
 
         // Reset spinner to no selection
-        spinner.setSelection(0);
+        if (!validTags.isEmpty()) {
+            spinner.setSelection(0);
+        }
     }
 
     /**
@@ -101,3 +115,5 @@ public class Common {
         });
     }
 }
+
+
