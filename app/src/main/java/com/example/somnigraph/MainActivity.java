@@ -131,6 +131,11 @@ public class MainActivity extends AppCompatActivity
         EditText dreamTitleView = (EditText) findViewById(R.id.titleBox);
         String dreamTitle = dreamTextView.getText().toString().trim();
 
+        if(dreamDescription.isEmpty())
+        {
+            return;
+        }
+
         LinearLayout tagContainer = findViewById(R.id.tagContainer);
         List<String> tags = new ArrayList<>();
 
@@ -145,6 +150,7 @@ public class MainActivity extends AppCompatActivity
         Dream dream = new Dream(tags, dreamDescription, dreamTitle);
         dreamManager.addDream(dream);
 
+        dreamTitleView.setText("");
         dreamTextView.setText("");
         tagContainer.removeAllViews();
     }
