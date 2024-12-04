@@ -23,7 +23,10 @@ public class Dream
         this.dreamDescription = dreamDescription;
         this.tags = new ArrayList<>(tags);
         this.loggedDate = new Date();
-        this.title = title;
+        if(!title.isEmpty())
+        {
+            this.title = title;
+        }
     }
 
     public String getTitle()

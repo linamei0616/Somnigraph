@@ -29,7 +29,20 @@
         android:layout_weight="1"
         android:orientation="vertical"
         android:padding="16dp">
-
+        <EditText
+            android:id="@+id/titleBox"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="0.1"
+            android:layout_gravity="center"
+            android:fontFamily="@font/poppins_semi_bold"
+            android:gravity="top"
+            android:layout_marginBottom="10dp"
+            android:hint="Enter Title"
+            android:inputType="textMultiLine"
+            android:textColor="@color/black"
+            android:background="@drawable/title_background"
+             />
         <!-- Logging Area -->
         <LinearLayout
             android:layout_width="match_parent"
