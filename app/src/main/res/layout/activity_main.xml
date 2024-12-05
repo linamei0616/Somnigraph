@@ -72,7 +72,115 @@
                 android:background="@drawable/mic_icon"
                 android:layout_marginTop="8dp" />
         </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginTop="16dp"
+            android:padding="16dp"
+            android:gravity="center">
 
+            <!-- Labels: Intense and Pleasant -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_gravity="center">
+
+                <TextView
+                    android:id="@+id/intenseLabel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Intense"
+                    android:textColor="@color/dark_purple"
+                    android:fontFamily="@font/poppins_semi_bold"
+                    android:layout_gravity="start" />
+                <Space
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1">
+
+                </Space>
+
+                <TextView
+                    android:id="@+id/pleasantLabel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Pleasant"
+                    android:textColor="@color/dark_purple"
+                    android:fontFamily="@font/poppins_semi_bold"
+                    android:layout_gravity="end" />
+            </LinearLayout>
+
+            <!-- Circle Indicators -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="8dp"
+                android:paddingLeft="-8dp"
+                android:paddingRight="-8dp">
+
+                <!-- Circle 1 -->
+                <View
+                    android:id="@+id/circle1"
+
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_margin="8dp"
+                    android:background="@drawable/circle_background1" />
+                <Space
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1">
+                </Space>
+
+                <!-- Circle 2 -->
+                <View
+                    android:id="@+id/circle2"
+
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_margin="8dp"
+                    android:background="@drawable/circle_background2" />
+                <Space
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1">
+                </Space>
+                <!-- Circle 3 -->
+                <View
+                    android:id="@+id/circle3"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_margin="8dp"
+                    android:background="@drawable/circle_background3" />
+                <Space
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1">
+                </Space>
+                <!-- Circle 4 -->
+                <View
+                    android:id="@+id/circle4"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_margin="8dp"
+                    android:background="@drawable/circle_background4" />
+                <Space
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1">
+                </Space>
+                <!-- Circle 5 -->
+                <View
+                    android:id="@+id/circle5"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_margin="8dp"
+                    android:background="@drawable/circle_background5" />
+            </LinearLayout>
+        </LinearLayout>
         <!-- Log Button -->
         <Button
             android:id="@+id/logBtn"
