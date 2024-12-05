@@ -28,6 +28,8 @@ public class DreamManager
     private Context context;
     private Map<String, String> tagToEmoji;
 
+    private Map<String, HashMap<String, List<Dream>>> tagToAllRelatedDreams = new HashMap<>();
+
     private DreamManager(Context context) {
         this.context = context;
         dreams = new ArrayList<>();
@@ -86,6 +88,7 @@ public class DreamManager
 
     public void addDream(Dream dream) {
         dreams.add(dream);
+        addDreamToRelatedDreams(dream);
         saveDreamsToFile();
     }
 
@@ -110,6 +113,10 @@ public class DreamManager
             dreams = gson.fromJson(reader, dreamListType);
             if (dreams == null) {
                 dreams = new ArrayList<>(); 
+            }
+            for(Dream dream : dreams)
+            {
+                addDreamToRelatedDreams(dream);
             }
         } catch (Exception e) {
 
@@ -199,6 +206,31 @@ public class DreamManager
         }
         return Optional.of(tagToEmoji.get(tag));
     }
+
+    private void addDreamToRelatedDreams(Dream dream)
+    {
+        for(String tag : dream.tags)
+        {
+            HashMap<String, List<Dream>> relatedTags = tagToAllRelatedDreams.getOrDefault(tag, new HashMap<>());
+            for(String relatedTag : dream.tags)
+            {
+                if(relatedTag.equals(tag))
+                {
+                    continue;
+                }
+                List<Dream> relatedDreamsForTag = relatedTags.getOrDefault(relatedTag, new ArrayList<>());
+                relatedDreamsForTag.add(dream);
+                relatedTags.put(relatedTag, relatedDreamsForTag);
+            }
+            tagToAllRelatedDreams.put(tag, relatedTags);
+        }
+    }
+
+    public HashMap<String, List<Dream>> getAllRelatedDreams(String tag)
+    {
+        return tagToAllRelatedDreams.getOrDefault(tag, new HashMap<>());
+    }
+
 
 
 }

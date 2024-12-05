@@ -69,10 +69,16 @@ public class Common {
     public static void setupSpinnerDreamGraph(Activity activity, Spinner spinner, DreamManager dreamManager, int tagThreshold) {
         // Filter tags to exclude those that would result in an empty word map
         List<String> validTags = new ArrayList<>();
-        for (String tag : dreamManager.getSortedTagsByFrequency()) {
-            List<Dream> dreams = dreamManager.getDreamsWithTag(tag);
-            if (dreams.size() >= tagThreshold) {
-                validTags.add(tag);
+        for (String tag : dreamManager.getSortedTagsByFrequency())
+        {
+            HashMap<String, List<Dream>> allRelatedDreams = dreamManager.getAllRelatedDreams(tag);
+            for(String relatedTag : allRelatedDreams.keySet())
+            {
+                if(allRelatedDreams.get(relatedTag).size() >= tagThreshold)
+                {
+                    validTags.add(tag);
+                    break;
+                }
             }
         }
 
