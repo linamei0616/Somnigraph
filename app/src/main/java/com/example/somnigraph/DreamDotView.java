@@ -39,7 +39,26 @@ public class DreamDotView extends LinearLayout {
         int dotSize = dpToPx(40);
         LinearLayout.LayoutParams dotParams = new LinearLayout.LayoutParams(dotSize, dotSize);
         dotView.setLayoutParams(dotParams);
-        dotView.setBackground(getResources().getDrawable(R.drawable.dream_dot_background));
+        switch(dream.dreamIntensity)
+        {
+            default:
+                dotView.setBackground(getResources().getDrawable(R.drawable.circle_background1));
+            case 1:
+                dotView.setBackground(getResources().getDrawable(R.drawable.circle_background1));
+                break;
+            case 2:
+                dotView.setBackground(getResources().getDrawable(R.drawable.circle_background2));
+                break;
+            case 3:
+                dotView.setBackground(getResources().getDrawable(R.drawable.circle_background3));
+                break;
+            case 4:
+                dotView.setBackground(getResources().getDrawable(R.drawable.circle_background4));
+                break;
+            case 5:
+                dotView.setBackground(getResources().getDrawable(R.drawable.circle_background5));
+                break;
+        }
 
         TextView dateView = new TextView(context);
         dateView.setText(dream.getTitle());
