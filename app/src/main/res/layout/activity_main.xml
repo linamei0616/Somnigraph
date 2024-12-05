@@ -106,7 +106,7 @@
                     android:id="@+id/pleasantLabel"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Pleasant"
+                    android:text="Calm"
                     android:textColor="@color/dark_purple"
                     android:fontFamily="@font/poppins_semi_bold"
                     android:layout_gravity="end" />
