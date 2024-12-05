@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.TypedValue;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ImageButton;
@@ -28,6 +29,7 @@ public class GraphActivity extends Activity {
     private DreamGroupAdapter pagerAdapter;
     private ViewPager2 dreamPager;
     private DreamGraphView dreamGraphView;
+    private TabLayout tabLayout;
     DreamManager dreamManager;
     private Spinner tagSpinner;
 
@@ -63,6 +65,7 @@ public class GraphActivity extends Activity {
 
     private void onTagSelected(AdapterView<?> parent, View view, int pos, long id)
     {
+
         String selectedTag = (String) parent.getItemAtPosition(pos);
         List<Dream> relatedDreams = dreamManager.getDreamsWithTag(selectedTag);
         Map<String, List<Dream>> tagToDream = new HashMap<>();
@@ -87,7 +90,27 @@ public class GraphActivity extends Activity {
             tagToDream.remove(tag);
         }
 
+
+        setupTabLayoutEnabled(tabLayout, tagToDream.size() > 1);
         generateGraph(tagToDream);
+        dreamPager.setCurrentItem(0, false);
+
+    }
+
+    private void setupTabLayoutEnabled(TabLayout tabLayout, boolean isEnabled) {
+        // Disable interaction
+        tabLayout.setEnabled(isEnabled);
+        tabLayout.setClickable(isEnabled);
+
+        // Optionally change the appearance
+        tabLayout.setAlpha(isEnabled ? 1.0f : 0f);
+
+        // Prevent touch events if disabled
+        if (!isEnabled) {
+            tabLayout.setOnTouchListener((v, event) -> true); // Consume all touch events
+        } else {
+            tabLayout.setOnTouchListener(null); // Restore default behavior
+        }
     }
 
     private void generateGraph(Map<String, List<Dream>> dreamsToGraph)
@@ -96,7 +119,7 @@ public class GraphActivity extends Activity {
     }
 
     private void setupPageIndicator() {
-        TabLayout tabLayout = findViewById(R.id.tabDots);
+        tabLayout = findViewById(R.id.tabDots);
         new TabLayoutMediator(tabLayout, dreamPager,
                 (tab, position) -> {
 
