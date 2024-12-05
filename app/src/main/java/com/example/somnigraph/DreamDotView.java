@@ -57,10 +57,12 @@ public class DreamDotView extends LinearLayout {
         TextView titleView = popupView.findViewById(R.id.dreamTitle);
         TextView contentView = popupView.findViewById(R.id.dreamContent);
         TextView dateView = popupView.findViewById(R.id.dreamDate);
+        TextView dreamTags = popupView.findViewById(R.id.dreamTags);
 
         titleView.setText(dream.getTitle());
         contentView.setText(dream.getContent());
         dateView.setText(dream.getDate());
+        dreamTags.setText(String.format(dream.getTagsAsString()));
 
         PopupWindow popup = new PopupWindow(
                 popupView,
