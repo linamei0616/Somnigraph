@@ -226,6 +226,19 @@ public class DreamManager
         }
     }
 
+    public String getEmojiTag(String tag)
+    {
+        Optional<String> tagEmoji = getEmojiFromTag(tag);
+        if(tagEmoji.isPresent())
+        {
+            return String.format("%s %s", tag, tagEmoji.get());
+        }
+        else
+        {
+            return tag;
+        }
+    }
+
     public HashMap<String, List<Dream>> getAllRelatedDreams(String tag)
     {
         return tagToAllRelatedDreams.getOrDefault(tag, new HashMap<>());
