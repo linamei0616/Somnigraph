@@ -42,7 +42,7 @@ public class DreamDotView extends LinearLayout {
         dotView.setBackground(getResources().getDrawable(R.drawable.dream_dot_background));
 
         TextView dateView = new TextView(context);
-        dateView.setText(dream.getDate());
+        dateView.setText(dream.getTitle());
         dateView.setPadding(dpToPx(8), 0, 0, 0);
 
         addView(dotView);

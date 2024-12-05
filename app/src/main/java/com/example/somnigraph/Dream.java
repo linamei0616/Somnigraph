@@ -44,6 +44,7 @@ public class Dream
 
     public String getDate()
     {
-        return loggedDate.toString();
+        return String.format("%d/%d/%d - %02d:%02d", loggedDate.getMonth() + 1, loggedDate.getDate(), (loggedDate.getYear() + 1900) % 100, loggedDate.getHours() % 12, loggedDate.getMinutes());
+//        return loggedDate.toString();
     }
 }
