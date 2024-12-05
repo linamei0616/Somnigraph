@@ -63,6 +63,41 @@ public class Common {
     }
 
     /**
+     * setupSpinner is a helper function that sets up the spinner for dropdown tags
+     *
+     */
+    public static void setupSpinnerDreamGraph(Activity activity, Spinner spinner, DreamManager dreamManager, int tagThreshold) {
+        // Filter tags to exclude those that would result in an empty word map
+        List<String> validTags = new ArrayList<>();
+        for (String tag : dreamManager.getSortedTagsByFrequency()) {
+            List<Dream> dreams = dreamManager.getDreamsWithTag(tag);
+            if (dreams.size() >= tagThreshold) {
+                validTags.add(tag);
+            }
+        }
+
+        // Setup adapter with filtered tags
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(
+                activity,
+                android.R.layout.simple_spinner_item,
+                validTags
+        );
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinner.setAdapter(adapter);
+
+        // Get the specific listener for this activity
+        AdapterView.OnItemSelectedListener listener = spinnerListeners.get(activity.getClass());
+        if (listener != null) {
+            spinner.setOnItemSelectedListener(listener);
+        }
+
+        // Reset spinner to no selection
+        if (!validTags.isEmpty()) {
+            spinner.setSelection(0);
+        }
+    }
+
+    /**
      * setupNavBar is a helper function that sets up the navigation bar throughout all screens
      *
      */
