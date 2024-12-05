@@ -22,13 +22,13 @@ public class TagAdapter extends ArrayAdapter<String>
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        // This sets the view for the selected item (only the plain string tag).
+        // This sets the view for the selected item (with emoji).
         if (convertView == null) {
             convertView = LayoutInflater.from(getContext())
                     .inflate(android.R.layout.simple_spinner_item, parent, false);
         }
         TextView textView = (TextView) convertView.findViewById(android.R.id.text1);
-        textView.setText(tags.get(position));
+        textView.setText(tagWithEmojis.get(position)); // Show tag + emoji for selected item
         return convertView;
     }
 
@@ -40,7 +40,7 @@ public class TagAdapter extends ArrayAdapter<String>
                     .inflate(android.R.layout.simple_spinner_dropdown_item, parent, false);
         }
         TextView textView = (TextView) convertView.findViewById(android.R.id.text1);
-        textView.setText(tagWithEmojis.get(position));
+        textView.setText(tagWithEmojis.get(position)); // Show tag + emoji in dropdown
         return convertView;
     }
 }

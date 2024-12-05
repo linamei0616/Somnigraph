@@ -62,6 +62,8 @@ public class DreamManager
         put("sports", "\u26BD"); // Soccer Ball
         put("flower", "\uD83C\uDF3C"); // Blossom
         put("tree", "\uD83C\uDF33"); // Deciduous Tree
+        put("crab", "\uD83E\uDD80"); // Crab
+        put("circus", "\uD83C\uDFAA"); // Circus
     }};
 
     private Map<String, HashMap<String, List<Dream>>> tagToAllRelatedDreams = new HashMap<>();
@@ -227,7 +229,9 @@ public class DreamManager
             tagToAllRelatedDreams.put(tag, relatedTags);
         }
     }
-
+    /*
+    * Returns the Tag with an emoji appended on the end if the emoji exists in table. Else just returns tag
+    * */
     public static String getEmojiTag(String tag)
     {
         Optional<String> tagEmoji = getEmojiFromTag(tag);

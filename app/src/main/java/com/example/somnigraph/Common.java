@@ -40,12 +40,16 @@ public class Common {
                 validTags.add(tag);
             }
         }
-
+        List<String> tagsWithEmojis = new ArrayList<>();
+        for(String tag : validTags)
+        {
+            tagsWithEmojis.add(dreamManager.getEmojiTag(tag));
+        }
         // Setup adapter with filtered tags
-        ArrayAdapter<String> adapter = new ArrayAdapter<>(
+        ArrayAdapter<String> adapter = new TagAdapter(
                 activity,
-                android.R.layout.simple_spinner_item,
-                validTags
+                validTags,
+                tagsWithEmojis
         );
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(adapter);
