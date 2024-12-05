@@ -105,7 +105,7 @@ public class CalendarTimeLineActivity extends Activity {
         fullTitle.setText(dream.getTitle());
         fullDate.setText(dream.getDate());
         fullDescription.setText(dream.getContent());
-        fullTags.setText(dream.getTagsAsString());
+        fullTags.setText(dream.getTagsWithEmojiAsString());
 
         // Create and show the dialog
         AlertDialog.Builder builder = new AlertDialog.Builder(this);

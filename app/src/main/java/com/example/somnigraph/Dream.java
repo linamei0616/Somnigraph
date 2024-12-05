@@ -44,6 +44,17 @@ public class Dream
     public String getTagsAsString() {
         return String.join(", ", tags);
     }
+
+    public String getTagsWithEmojiAsString()
+    {
+        List<String> emojiTags = new ArrayList<>();
+        for(String tag : tags)
+        {
+            emojiTags.add(DreamManager.getEmojiTag(tag));
+        }
+        return String.join(", ", emojiTags);
+    }
+
     public int getDreamIntensity()
     {
         return dreamIntensity;
@@ -51,7 +62,8 @@ public class Dream
 
     public String getDate()
     {
-        return String.format("%d/%d/%d - %02d:%02d", loggedDate.getMonth() + 1, loggedDate.getDate(), (loggedDate.getYear() + 1900) % 100, loggedDate.getHours() % 12, loggedDate.getMinutes());
+        String amOrPm = loggedDate.getHours() < 12 ? "AM" : "PM";
+        return String.format("%d/%d/%d - %02d:%02d %s", loggedDate.getMonth() + 1, loggedDate.getDate(), (loggedDate.getYear() + 1900) % 100, loggedDate.getHours() % 12, loggedDate.getMinutes(), amOrPm);
 //        return loggedDate.toString();
     }
 }
