@@ -80,6 +80,7 @@ public class GraphActivity extends Activity {
                 tagToDream.put(tag, dreamsContainingTag);
             }
         }
+        HashMap<String, List<Dream>> tagToDreamCopy = new HashMap<>(tagToDream);
         for(String tag : allTags)
         {
             assert(tagToDream.containsKey(tag));
@@ -90,7 +91,10 @@ public class GraphActivity extends Activity {
             tagToDream.remove(tag);
         }
 
-
+        if(tagToDream.size() == 0)
+        {
+            tagToDream = tagToDreamCopy;
+        }
         setupTabLayoutEnabled(tabLayout, tagToDream.size() > 1);
         generateGraph(tagToDream);
         dreamPager.setCurrentItem(0, false);
