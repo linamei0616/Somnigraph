@@ -1,7 +1,6 @@
-<?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     android:background="@drawable/rounded_card"
     android:padding="16dp">
 
@@ -10,6 +9,19 @@
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
+        <!-- Close Button -->
+        <Button
+            android:id="@+id/close_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end"
+            android:text="X"
+            android:textColor="@color/black"
+            android:textSize="16sp"
+            android:padding="4dp"
+            android:contentDescription="Close Button" />
+
+        <!-- Title -->
         <TextView
             android:id="@+id/full_dream_title"
             android:layout_width="wrap_content"
@@ -20,6 +32,7 @@
             android:textColor="@color/black"
             android:text="Full Dream Title" />
 
+        <!-- Date -->
         <TextView
             android:id="@+id/full_dream_date"
             android:layout_width="wrap_content"
@@ -27,8 +40,9 @@
             android:fontFamily="@font/poppins_semi_bold"
             android:textSize="14sp"
             android:textColor="#888888"
-            android:text="Full_Dream Date" />
+            android:text="Dream Date" />
 
+        <!-- Description -->
         <TextView
             android:id="@+id/full_dream_description"
             android:layout_width="wrap_content"
@@ -36,9 +50,9 @@
             android:fontFamily="@font/poppins_semi_bold"
             android:textSize="16sp"
             android:textColor="@color/black"
-            android:text="Full Dream Description"
-            android:paddingTop="8dp"/>
+            android:text="Full Dream Description" />
 
+        <!-- Tags -->
         <TextView
             android:id="@+id/full_dream_tags"
             android:layout_width="wrap_content"
@@ -46,8 +60,6 @@
             android:fontFamily="@font/poppins_semi_bold"
             android:textSize="14sp"
             android:textColor="#666666"
-            android:text="Full Dream Tags"
-            android:paddingTop="8dp"/>
+            android:text="Full Dream Tags" />
     </LinearLayout>
-
 </ScrollView>

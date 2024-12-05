@@ -5,6 +5,7 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -56,21 +57,26 @@ public class DreamAdapter extends RecyclerView.Adapter<DreamAdapter.DreamViewHol
 
         // Set up the dialog views
         TextView title = dialogView.findViewById(R.id.full_dream_title);
-        TextView date = dialogView.findViewById(R.id.full_dream_date); // Include date TextView
+        TextView date = dialogView.findViewById(R.id.full_dream_date);
         TextView description = dialogView.findViewById(R.id.full_dream_description);
         TextView tags = dialogView.findViewById(R.id.full_dream_tags);
 
         // Populate data
         title.setText(dream.getTitle());
-        date.setText(dream.getDate()); // Ensure the date is set correctly
+        date.setText(dream.getDate());
         description.setText(dream.getContent());
-        tags.setText(dream.getTagsWithEmojiAsString());
+        tags.setText(dream.getTagsAsString());
 
         // Create and show the AlertDialog
-        AlertDialog.Builder builder = new AlertDialog.Builder(context);
-        builder.setView(dialogView)
-                .setCancelable(true) // Allows the dialog to be dismissed when tapped outside
-                .show();
+        AlertDialog dialog = new AlertDialog.Builder(context).create();
+        dialog.setView(dialogView);
+        dialog.setCancelable(false); // Prevent dismissal by tapping outside
+
+        // Close button functionality
+        Button closeButton = dialogView.findViewById(R.id.close_button);
+        closeButton.setOnClickListener(v -> dialog.dismiss());
+
+        dialog.show();
     }
 
     public static class DreamViewHolder extends RecyclerView.ViewHolder {
