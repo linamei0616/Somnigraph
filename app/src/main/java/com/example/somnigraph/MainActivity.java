@@ -2,40 +2,42 @@ package com.example.somnigraph;
 
 import android.app.AlertDialog;
 import android.content.Context;
-import android.content.Intent;
 import android.graphics.Color;
+import android.graphics.drawable.Drawable;
+import android.graphics.drawable.GradientDrawable;
+import android.graphics.drawable.LayerDrawable;
+import android.graphics.drawable.ShapeDrawable;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.Space;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.somnigraph.WordCloud.WordCloudActivity;
 import com.google.android.material.textfield.TextInputEditText;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Calendar;
 import java.util.Optional;
 
 public class MainActivity extends AppCompatActivity
 {
     DreamManager dreamManager;
+    private int dreamIntensity = 3;
+    private final int circleCount = 5;
+    private List<View> circles = new ArrayList<>();
+
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
@@ -54,7 +56,69 @@ public class MainActivity extends AppCompatActivity
         logBtn.setOnClickListener(this::createDream);
 
         Common.setupNavBar(this);
+        setupIntensityButtons();
+        setCircle();
     }
+
+    private int getColorByName(String baseName, int number) {
+        // Construct the full resource name, like "color1", "color2", etc.
+        String resourceName = baseName + number;
+
+        // Get the resource identifier dynamically
+        int colorResId = getResources().getIdentifier(resourceName, "color", getPackageName());
+
+        // Check if the resource was found, if not, return a default color
+        if (colorResId != 0) {
+            return getResources().getColor(colorResId, null);
+        } else {
+            return getResources().getColor(android.R.color.darker_gray, null); // Default color
+        }
+    }
+
+    private void setCircle()
+    {
+        int index = 1;
+        for(View circle : circles)
+        {
+            String resourceName = "circle_background" + index;
+            int resId = getResources().getIdentifier(resourceName, "drawable", getPackageName());
+            circle.setBackground(ContextCompat.getDrawable(this, resId));
+            index += 1;
+        }
+        LayerDrawable layerDrawable = (LayerDrawable) ContextCompat.getDrawable(this, R.drawable.selected_circle_background);
+        if (layerDrawable != null) {
+            Drawable innerDrawable = layerDrawable.getDrawable(0);
+            if (innerDrawable instanceof GradientDrawable) {
+                ((GradientDrawable) innerDrawable).setColor(getColorByName("circle", dreamIntensity));
+            }
+        }
+        circles.get(dreamIntensity - 1).setBackground(ContextCompat.getDrawable(this, R.drawable.selected_circle_background));
+
+
+
+
+    }
+
+    private void setupIntensityButtons()
+    {
+        for(int circleIndex = 1; circleIndex <= circleCount; ++circleIndex)
+        {
+            String resourceName = "circle" + circleIndex;
+            int resId = getResources().getIdentifier(resourceName, "id", getPackageName());
+            View circleView = findViewById(resId);
+            circles.add(circleView);
+            circleView.setClickable(true);
+            int finalCircleIndex = circleIndex;
+            circleView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    dreamIntensity = finalCircleIndex;
+                    setCircle();
+                }
+            });
+        }
+    }
+
     private void onTagPlusBtnClick(View view) {
         LayoutInflater inflater = getLayoutInflater();
         View dialogView = inflater.inflate(R.layout.dialog_input, null);
@@ -165,7 +229,7 @@ public class MainActivity extends AppCompatActivity
             }
         }
 
-        Dream dream = new Dream(tags, dreamDescription, dreamTitle);
+        Dream dream = new Dream(tags, dreamDescription, dreamTitle, dreamIntensity);
         dreamManager.addDream(dream);
 
         dreamTitleView.setText("");

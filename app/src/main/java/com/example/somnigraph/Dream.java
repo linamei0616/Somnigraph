@@ -9,6 +9,8 @@ public class Dream
     public ArrayList<String> tags;
     public String dreamDescription;
     public Date loggedDate;
+
+    public int dreamIntensity;
     public String title = "default title";
 
     public Dream(List<String> tags, String dreamDescription)
@@ -18,11 +20,12 @@ public class Dream
         this.loggedDate = new Date();
     }
 
-    public Dream(List<String> tags, String dreamDescription, String title)
+    public Dream(List<String> tags, String dreamDescription, String title, int dreamIntensity)
     {
         this.dreamDescription = dreamDescription;
         this.tags = new ArrayList<>(tags);
         this.loggedDate = new Date();
+        this.dreamIntensity = dreamIntensity;
         if(!title.isEmpty())
         {
             this.title = title;
@@ -40,6 +43,10 @@ public class Dream
 
     public String getTagsAsString() {
         return String.join(", ", tags);
+    }
+    public int getDreamIntensity()
+    {
+        return dreamIntensity;
     }
 
     public String getDate()
