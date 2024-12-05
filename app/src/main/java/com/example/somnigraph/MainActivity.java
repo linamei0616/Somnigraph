@@ -14,6 +14,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.Space;
 import android.widget.TextView;
@@ -54,6 +55,9 @@ public class MainActivity extends AppCompatActivity
 
         Button logBtn = (Button) findViewById(R.id.logBtn);
         logBtn.setOnClickListener(this::createDream);
+
+        ImageButton micBtn = (ImageButton) findViewById(R.id.micBtn);
+        micBtn.setOnClickListener(this::micBtnPress);
 
         Common.setupNavBar(this);
         setupIntensityButtons();
@@ -200,6 +204,13 @@ public class MainActivity extends AppCompatActivity
         tagContainer.addView(tagLayout);
 
         dialog.dismiss();
+    }
+
+    private void micBtnPress(View view)
+    {
+        TextView dreamTextView = (TextView) findViewById(R.id.loggingBox);
+        dreamTextView.setText("I was trapped in the basement with all my friends and family. We played board games :).");
+
     }
 
     private void createDream(View view) {

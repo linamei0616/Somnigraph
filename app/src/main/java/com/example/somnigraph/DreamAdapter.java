@@ -37,7 +37,7 @@ public class DreamAdapter extends RecyclerView.Adapter<DreamAdapter.DreamViewHol
         // Update the views with data from the Dream object
         holder.titleTextView.setText(dream.getTitle()); // Sets the title
         holder.descriptionTextView.setText(dream.getContent()); // Sets the description
-        holder.tagsTextView.setText(dream.getTagsAsString()); // Sets the tags
+        holder.tagsTextView.setText(dream.getTagsWithEmojiAsString()); // Sets the tags
         holder.dateTextView.setText(dream.getDate()); // Sets the date (FIX HERE)
 
         // Set click listener to open dialog
@@ -64,7 +64,7 @@ public class DreamAdapter extends RecyclerView.Adapter<DreamAdapter.DreamViewHol
         title.setText(dream.getTitle());
         date.setText(dream.getDate()); // Ensure the date is set correctly
         description.setText(dream.getContent());
-        tags.setText(dream.getTagsAsString());
+        tags.setText(dream.getTagsWithEmojiAsString());
 
         // Create and show the AlertDialog
         AlertDialog.Builder builder = new AlertDialog.Builder(context);
