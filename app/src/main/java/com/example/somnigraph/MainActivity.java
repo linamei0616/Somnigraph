@@ -1,6 +1,7 @@
 package com.example.somnigraph;
 
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -15,6 +16,7 @@ import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.Space;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
@@ -142,11 +144,16 @@ public class MainActivity extends AppCompatActivity
         EditText dreamTitleView = (EditText) findViewById(R.id.titleBox);
         String dreamTitle = dreamTitleView.getText().toString().trim();
 
-        if(dreamDescription.isEmpty() || dreamTitle.isEmpty())
+        if(dreamTitle.isEmpty())
         {
+            Toast.makeText((Context) this, (CharSequence) "You must have a title", (int) 1f).show();
             return;
         }
-
+        if(dreamDescription.isEmpty() )
+        {
+            Toast.makeText((Context) this, (CharSequence) "You must have a description", (int) 1f).show();
+            return;
+        }
         LinearLayout tagContainer = findViewById(R.id.tagContainer);
         List<String> tags = new ArrayList<>();
 
