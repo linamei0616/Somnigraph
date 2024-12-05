@@ -172,6 +172,7 @@ public class MainActivity extends AppCompatActivity
         {
             tagTextView.setText(tag);
         }
+        tagTextView.setTag(tag);
 //        tagTextView.setText(tag);
         tagTextView.setTextSize(20);
         tagTextView.setTextColor(Color.BLACK);
@@ -225,7 +226,7 @@ public class MainActivity extends AppCompatActivity
             View tagLayout = tagContainer.getChildAt(i);
             if (tagLayout instanceof LinearLayout) {
                 TextView tagTextView = (TextView) ((LinearLayout) tagLayout).getChildAt(0);
-                tags.add(tagTextView.getText().toString());
+                tags.add(tagTextView.getTag().toString());
             }
         }
 
