@@ -11,7 +11,7 @@
     <item
         android:id="@+id/action_graph"
         android:icon="@drawable/graph"
-        android:title="Graph" />
+        android:title="Connections" />
     <item
         android:id="@+id/action_calendar"
         android:icon="@drawable/calendar"
