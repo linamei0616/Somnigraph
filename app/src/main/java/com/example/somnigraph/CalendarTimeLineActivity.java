@@ -13,6 +13,8 @@ import android.app.AlertDialog;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+// This line is to make my github history more green >:) heh heh heh
+// https://www.dreamstime.com/illustration/villain-emoticon.html
 
 
 
