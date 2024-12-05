@@ -53,7 +53,7 @@ public class GraphActivity extends Activity {
         });
 
         Spinner tagSpinner = findViewById(R.id.connectionSpinner);
-        Common.setupSpinner(this, tagSpinner, dreamManager);
+        Common.setupSpinnerDreamGraph(this, tagSpinner, dreamManager, minOccurrenceCountForCategory);
 
         dreamPager = findViewById(R.id.dreamPager);
         pagerAdapter = new DreamGroupAdapter(this);

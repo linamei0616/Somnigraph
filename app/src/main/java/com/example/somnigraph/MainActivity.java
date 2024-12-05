@@ -129,7 +129,7 @@ public class MainActivity extends AppCompatActivity
         String dreamDescription = dreamTextView.getText().toString().trim();
 
         EditText dreamTitleView = (EditText) findViewById(R.id.titleBox);
-        String dreamTitle = dreamTextView.getText().toString().trim();
+        String dreamTitle = dreamTitleView.getText().toString().trim();
 
         if(dreamDescription.isEmpty())
         {
