@@ -235,5 +235,7 @@ public class MainActivity extends AppCompatActivity
         dreamTitleView.setText("");
         dreamTextView.setText("");
         tagContainer.removeAllViews();
+        Toast.makeText((Context) this, (CharSequence) "Dream Logged", (int) 1f).show();
+
     }
 }
