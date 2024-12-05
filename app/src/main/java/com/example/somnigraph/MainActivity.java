@@ -29,6 +29,7 @@ import com.google.android.material.textfield.TextInputEditText;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Calendar;
+import java.util.Optional;
 
 public class MainActivity extends AppCompatActivity
 {
@@ -96,7 +97,16 @@ public class MainActivity extends AppCompatActivity
         );
         textParams.setMargins(0, 0, 20, 0);
         tagTextView.setLayoutParams(textParams);
-        tagTextView.setText(tag);
+        Optional<String> tagEmoji = dreamManager.getEmojiFromTag(tag);
+        if(tagEmoji.isPresent())
+        {
+            tagTextView.setText(String.format("%s %s", tag, tagEmoji.get()));
+        }
+        else
+        {
+            tagTextView.setText(tag);
+        }
+//        tagTextView.setText(tag);
         tagTextView.setTextSize(20);
         tagTextView.setTextColor(Color.BLACK);
 
@@ -117,6 +127,7 @@ public class MainActivity extends AppCompatActivity
 
 
         tagLayout.addView(tagTextView);
+        tagLayout.addView(spaceFiller);
         tagLayout.addView(deleteButton);
 
         tagContainer.addView(tagLayout);

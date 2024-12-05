@@ -12,10 +12,12 @@ import java.nio.charset.StandardCharsets;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Dictionary;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
+import java.util.Optional;
 
 public class DreamManager
 {
@@ -24,13 +26,56 @@ public class DreamManager
     private static final String FILENAME = "dreams.json";
     private Gson gson;
     private Context context;
+    private Map<String, String> tagToEmoji;
 
     private DreamManager(Context context) {
         this.context = context;
         dreams = new ArrayList<>();
         gson = new Gson();
+        loadEmojiTags();
         loadDreamsFromFile();
     }
+
+    private void loadEmojiTags()
+    {
+        tagToEmoji = new HashMap<>() {{
+            put("clown", "\uD83E\uDD21"); // Clown Face
+            put("nightmare", "\uD83D\uDC7B"); // Ghost
+            put("fire", "\uD83D\uDD25"); // Fire
+            put("love", "\u2764\uFE0F"); // Red Heart
+            put("happy", "\uD83D\uDE03"); // Smiling Face with Open Mouth
+            put("sad", "\uD83D\uDE1E"); // Disappointed Face
+            put("angry", "\uD83D\uDE21"); // Angry Face
+            put("party", "\uD83C\uDF89"); // Party Popper
+            put("celebrate", "\uD83C\uDF8A"); // Confetti Ball
+            put("alien", "\uD83D\uDC7D"); // Alien
+            put("robot", "\uD83E\uDD16"); // Robot Face
+            put("star", "\u2B50"); // Star
+            put("sun", "\u2600\uFE0F"); // Sun
+            put("moon", "\uD83C\uDF19"); // Crescent Moon
+            put("ghost", "\uD83D\uDC7B"); // Ghost
+            put("rain", "\uD83C\uDF27\uFE0F"); // Cloud with Rain
+            put("snow", "\u2744\uFE0F"); // Snowflake
+            put("music", "\uD83C\uDFB5"); // Musical Note
+            put("coffee", "\u2615"); // Hot Beverage
+            put("pizza", "\uD83C\uDF55"); // Pizza
+            put("cat", "\uD83D\uDC08"); // Cat
+            put("dog", "\uD83D\uDC36"); // Dog
+            put("dragon", "\uD83D\uDC09"); // Dragon
+            put("skull", "\uD83D\uDC80"); // Skull
+            put("lightbulb", "\uD83D\uDCA1"); // Light Bulb
+            put("rainbow", "\uD83C\uDF08"); // Rainbow
+            put("book", "\uD83D\uDCD6"); // Open Book
+            put("pencil", "\u270F\uFE0F"); // Pencil
+            put("money", "\uD83D\uDCB0"); // Money Bag
+            put("game", "\uD83C\uDFAE"); // Video Game
+            put("sports", "\u26BD"); // Soccer Ball
+            put("flower", "\uD83C\uDF3C"); // Blossom
+            put("tree", "\uD83C\uDF33"); // Deciduous Tree
+        }};
+    }
+
+
 
     public static synchronized DreamManager getInstance(Context context) {
         if (instance == null) {
@@ -146,5 +191,14 @@ public class DreamManager
         }
         return emojis;
     }
+
+    public Optional<String> getEmojiFromTag(String tag) {
+        tag = tag.toLowerCase();
+        if (!tagToEmoji.containsKey(tag.toLowerCase())) {
+            return Optional.empty();
+        }
+        return Optional.of(tagToEmoji.get(tag));
+    }
+
 
 }
