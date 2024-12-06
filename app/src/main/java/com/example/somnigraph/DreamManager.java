@@ -14,10 +14,13 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Dictionary;
 import java.util.HashMap;
+import java.util.HashSet;
+import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import java.util.Optional;
+import java.util.Set;
 
 public class DreamManager
 {
@@ -186,7 +189,7 @@ public class DreamManager
     }
 
     public List<String> getEmojisForDate(Calendar date) {
-        List<String> emojis = new ArrayList<>();
+        Set<String> uniqueEmojis = new LinkedHashSet<>();
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());
         String targetDate = sdf.format(date.getTime());
 
@@ -195,13 +198,29 @@ public class DreamManager
             if (dreamDate.equals(targetDate)) {
                 for (String tag : dream.tags) {
                     if (tag.matches("[\\p{So}\\p{Cn}]+")) {
-                        emojis.add(tag);
+                        uniqueEmojis.add(tag);
+                    }
+
+                    String[] words = tag.split("\\s+");
+                    for (String word : words) {
+                        Optional<String> emoji = getEmojiFromTag(word);
+                        emoji.ifPresent(uniqueEmojis::add);
+                    }
+
+                    if (uniqueEmojis.size() >= 4) {
+                        break;
                     }
                 }
             }
+
+            if (uniqueEmojis.size() >= 4) {
+                break;
+            }
         }
-        return emojis;
+        return new ArrayList<>(uniqueEmojis).subList(0, Math.min(4, uniqueEmojis.size()));
     }
+
+
 
     public static Optional<String> getEmojiFromTag(String tag) {
         tag = tag.toLowerCase();

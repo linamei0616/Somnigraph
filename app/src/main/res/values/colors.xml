@@ -12,5 +12,6 @@
     <color name="circle3">#E0E0E0</color>
     <color name="circle4">#A1D3A1</color>
     <color name="circle5">#4AD14A</color>
+    <color name="default_button_text_color">#000000</color>
 
 </resources>

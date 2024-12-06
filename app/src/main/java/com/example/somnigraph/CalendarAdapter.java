@@ -1,6 +1,7 @@
 package com.example.somnigraph;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -74,7 +75,6 @@ public class CalendarAdapter extends RecyclerView.Adapter<CalendarAdapter.MonthV
             }
 
             for (int i = 1; i <= daysInMonth; i++) {
-                // Create a vertical layout for each day cell
                 LinearLayout dayLayout = new LinearLayout(context);
                 dayLayout.setOrientation(LinearLayout.VERTICAL);
                 dayLayout.setGravity(Gravity.CENTER);
@@ -101,8 +101,17 @@ public class CalendarAdapter extends RecyclerView.Adapter<CalendarAdapter.MonthV
                 dayLayout.addView(dayView);
                 dayLayout.addView(emojiView);
 
+                dayLayout.setOnClickListener(v -> openWeekViewForDay(day));
+
                 daysGrid.addView(dayLayout);
             }
+        }
+
+        private void openWeekViewForDay(Calendar day) {
+            Intent intent = new Intent(context, CalendarWeekActivity.class);
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());
+            intent.putExtra("selected_date", sdf.format(day.getTime()));
+            context.startActivity(intent);
         }
     }
 

@@ -2,10 +2,12 @@ package com.example.somnigraph;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Paint;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.TextView;
 import java.text.SimpleDateFormat;
@@ -22,27 +24,123 @@ import java.util.ArrayList;
 
 public class CalendarWeekActivity extends Activity {
     DreamManager dreamManager;
+    private Button selectedButton = null;
 
-    protected void onCreate(Bundle savedInstanceState)
-    {
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
         dreamManager = DreamManager.getInstance(this);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_calendar_weekview);
         Common.setupNavBar(this);
         setupSpinner();
         setupDayButtons();
-        updateWeekRange();
+
+        Intent intent = getIntent();
+        String selectedDate = intent.getStringExtra("selected_date");
+
+        updateWeekRange(selectedDate);
+
+        if (selectedDate != null) {
+            loadDreamsForSpecificDate(selectedDate);
+            highlightSelectedDay(selectedDate);
+        }
+    }
+
+
+    private void loadDreamsForSpecificDate(String selectedDate) {
+        TextView loggingBox = findViewById(R.id.loggingBox);
+        LinearLayout tagContainer = findViewById(R.id.tagContainer);
+
+        ArrayList<Dream> dreams = dreamManager.getDreams();
+        StringBuilder dreamsContent = new StringBuilder();
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());
+
+        tagContainer.removeAllViews();
+
+        for (Dream dream : dreams) {
+            String dreamDate = sdf.format(dream.loggedDate);
+            if (dreamDate.equals(selectedDate)) {
+                dreamsContent.append(dream.getDate()).append("\n");
+                dreamsContent.append(dream.getContent()).append("\n");
+                dreamsContent.append("Tags: ").append(dream.getTagsWithEmojiAsString()).append("\n\n");
+
+                for (String tag : dream.tags) {
+                    addTagToContainer(tagContainer, DreamManager.getEmojiTag(tag));
+                }
+            }
+        }
+
+        if (dreamsContent.length() > 0) {
+            loggingBox.setText(dreamsContent.toString());
+        } else {
+            loggingBox.setText("No dreams logged for this day.");
+        }
     }
 
     private void setupDayButtons() {
-        findViewById(R.id.sundayButton).setOnClickListener(view -> loadDreamsForDay(Calendar.SUNDAY));
-        findViewById(R.id.mondayButton).setOnClickListener(view -> loadDreamsForDay(Calendar.MONDAY));
-        findViewById(R.id.tuesdayButton).setOnClickListener(view -> loadDreamsForDay(Calendar.TUESDAY));
-        findViewById(R.id.wednesdayButton).setOnClickListener(view -> loadDreamsForDay(Calendar.WEDNESDAY));
-        findViewById(R.id.thursdayButton).setOnClickListener(view -> loadDreamsForDay(Calendar.THURSDAY));
-        findViewById(R.id.fridayButton).setOnClickListener(view -> loadDreamsForDay(Calendar.FRIDAY));
-        findViewById(R.id.saturdayButton).setOnClickListener(view -> loadDreamsForDay(Calendar.SATURDAY));
+        findViewById(R.id.sundayButton).setOnClickListener(view -> selectDayButton((Button) view, Calendar.SUNDAY));
+        findViewById(R.id.mondayButton).setOnClickListener(view -> selectDayButton((Button) view, Calendar.MONDAY));
+        findViewById(R.id.tuesdayButton).setOnClickListener(view -> selectDayButton((Button) view, Calendar.TUESDAY));
+        findViewById(R.id.wednesdayButton).setOnClickListener(view -> selectDayButton((Button) view, Calendar.WEDNESDAY));
+        findViewById(R.id.thursdayButton).setOnClickListener(view -> selectDayButton((Button) view, Calendar.THURSDAY));
+        findViewById(R.id.fridayButton).setOnClickListener(view -> selectDayButton((Button) view, Calendar.FRIDAY));
+        findViewById(R.id.saturdayButton).setOnClickListener(view -> selectDayButton((Button) view, Calendar.SATURDAY));
     }
+
+    private void highlightSelectedDay(String selectedDate) {
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());
+        Calendar calendar = Calendar.getInstance();
+
+        try {
+            calendar.setTime(sdf.parse(selectedDate));
+        } catch (Exception e) {
+            e.printStackTrace();
+            return;
+        }
+
+        int dayOfWeek = calendar.get(Calendar.DAY_OF_WEEK);
+
+        Button targetButton = null;
+        switch (dayOfWeek) {
+            case Calendar.SUNDAY:
+                targetButton = findViewById(R.id.sundayButton);
+                break;
+            case Calendar.MONDAY:
+                targetButton = findViewById(R.id.mondayButton);
+                break;
+            case Calendar.TUESDAY:
+                targetButton = findViewById(R.id.tuesdayButton);
+                break;
+            case Calendar.WEDNESDAY:
+                targetButton = findViewById(R.id.wednesdayButton);
+                break;
+            case Calendar.THURSDAY:
+                targetButton = findViewById(R.id.thursdayButton);
+                break;
+            case Calendar.FRIDAY:
+                targetButton = findViewById(R.id.fridayButton);
+                break;
+            case Calendar.SATURDAY:
+                targetButton = findViewById(R.id.saturdayButton);
+                break;
+        }
+
+        if (targetButton != null) {
+            selectDayButton(targetButton, dayOfWeek);
+        }
+    }
+
+    private void selectDayButton(Button button, int dayOfWeek) {
+        if (selectedButton != null) {
+            selectedButton.setTextColor(getResources().getColor(R.color.default_button_text_color));
+        }
+
+        button.setTextColor(getResources().getColor(R.color.white));
+        selectedButton = button;
+
+        loadDreamsForDay(dayOfWeek);
+    }
+
 
 
     private void loadDreamsForDay(int dayOfWeek) {
@@ -86,25 +184,31 @@ public class CalendarWeekActivity extends Activity {
         }
     }
 
-    private void updateWeekRange() {
+    private void updateWeekRange(String selectedDate) {
         TextView weekRangeText = findViewById(R.id.weekRangeText);
 
-        // Get the current date
         Calendar calendar = Calendar.getInstance();
-
-        // Set to the first day of the current week (Sunday)
-        calendar.set(Calendar.DAY_OF_WEEK, Calendar.SUNDAY);
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());
         SimpleDateFormat dateFormat = new SimpleDateFormat("MMM d", Locale.getDefault());
+
+        if (selectedDate != null) {
+            try {
+                calendar.setTime(sdf.parse(selectedDate));
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+
+        calendar.set(Calendar.DAY_OF_WEEK, Calendar.SUNDAY);
         String weekStart = dateFormat.format(calendar.getTime());
 
-        // Move to the last day of the current week (Saturday)
         calendar.add(Calendar.DATE, 6);
         String weekEnd = dateFormat.format(calendar.getTime());
 
-        // Update the TextView with the week range
         String weekRange = "WEEK: " + weekStart + " - " + weekEnd;
         weekRangeText.setText(weekRange);
     }
+
 
     private void addTagToContainer(LinearLayout tagContainer, String tagText) {
         Context context = tagContainer.getContext();
