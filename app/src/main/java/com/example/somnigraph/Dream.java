@@ -7,6 +7,10 @@ import java.util.List;
 public class Dream
 {
     public ArrayList<String> tags;
+
+    public ArrayList<String> getTags() {
+        return tags;
+    }
     public String dreamDescription;
     public Date loggedDate;
 

@@ -11,6 +11,213 @@
 
     <LinearLayout
         android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight=".1"
+        android:background="@color/light_purple"
+        android:orientation="vertical"
+        android:padding="16dp"
+        tools:context=".MainActivity">
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight=".2"
+            android:orientation="horizontal"
+            android:padding="16dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight=".7"
+                android:fontFamily="@font/anta"
+                android:text="DAY: Oct 20"
+                android:textColor="@color/black"
+                android:textSize="40sp"
+                android:textStyle="bold" />
+
+
+            <Spinner
+                android:layout_width="wrap_content"
+                android:layout_height="87dp"
+                android:layout_weight=".3"
+                android:entries="@array/sort_by_options"
+                android:fontFamily="@font/anta"
+                android:padding="16dp"
+                android:textStyle="bold" />
+
+
+        </LinearLayout>
+
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight=".55"
+            android:background="@drawable/logging_background"
+
+            android:orientation="vertical">
+
+            <EditText
+                android:id="@+id/loggingBox"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="0.8"
+                android:background="@null"
+                android:fontFamily="@font/poppins_semi_bold"
+                android:gravity="top"
+                android:hint="@string/logging_hint"
+                android:inputType="textMultiLine"
+                android:padding="16dp"
+                android:textColor="@color/black" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="0.1"
+                android:gravity="center"
+                android:paddingBottom="3dp">
+
+                <ImageButton
+                    android:id="@+id/micBtn"
+                    android:layout_width="50dp"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/mic_icon">
+
+                </ImageButton>
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/logBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:fontFamily="@font/poppins_semi_bold"
+            android:gravity="bottom"
+            android:text="Log" />
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginTop="16dp"
+            android:layout_weight="0.1"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="70dp"
+                android:background="@drawable/tag_background"
+                android:gravity="center"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp">
+
+                <HorizontalScrollView
+                    android:id="@+id/tagInput"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight=".9"
+                    android:hint="Tags"
+                    android:padding="10dp">
+
+                    <LinearLayout
+                        android:id="@+id/tagContainer"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:orientation="horizontal" />
+                </HorizontalScrollView>
+
+                <Button
+                    android:id="@+id/addTagButton"
+                    android:layout_width="0dp"
+                    android:layout_height="35dp"
+                    android:layout_gravity="center"
+                    android:layout_weight="0.1"
+                    android:background="@drawable/plus"
+                    android:gravity="center" />
+            </LinearLayout>
+
+
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/poppins_semi_bold"
+            android:gravity="center"
+            android:text="Tags"
+            android:textColor="@color/black" />
+
+        <!-- Bottom navigation buttons -->
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="0.1"
+            android:gravity="bottom">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:background="@color/purple"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <ImageButton
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.25"
+                    android:background="@color/purple"
+                    android:contentDescription="Pencil icon"
+                    android:padding="10dp"
+                    android:scaleType="fitCenter"
+                    android:src="@drawable/pencil" />
+
+                <ImageButton
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_weight="0.25"
+                    android:background="@color/purple"
+                    android:contentDescription="Cloud icon"
+                    android:scaleType="fitCenter"
+                    android:src="@drawable/cloud" />
+
+
+                <ImageButton
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_weight="0.25"
+                    android:background="@color/purple"
+                    android:contentDescription="Graph icon"
+                    android:scaleType="fitCenter"
+                    android:scaleX="0.85"
+                    android:scaleY="0.85"
+                    android:src="@drawable/graph" />
+
+                <ImageButton
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_weight="0.25"
+                    android:background="@color/purple"
+                    android:contentDescription="Calendar icon"
+                    android:scaleType="fitCenter"
+                    android:scaleX="0.85"
+                    android:scaleY="0.85"
+                    android:src="@drawable/calendar" />
+            </LinearLayout>
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="41dp"
         android:layout_weight=".1"
         android:orientation="horizontal"
