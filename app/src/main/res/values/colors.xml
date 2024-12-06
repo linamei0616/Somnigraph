@@ -6,4 +6,11 @@
     <color name="light_purple">	#FFF5F2FF</color>
     <color name="purple">#ffa479ba</color>
     <color name="gray">#A0A0A0</color>
+    <color name="thisprojectcolor">#dfd6fa</color>
+    <color name="circle1">#D14A4A</color>
+    <color name="circle2">#F5B94A</color>
+    <color name="circle3">#E0E0E0</color>
+    <color name="circle4">#A1D3A1</color>
+    <color name="circle5">#4AD14A</color>
+
 </resources>

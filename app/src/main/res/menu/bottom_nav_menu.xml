@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/action_pencil"
+        android:icon="@drawable/pencil"
+        android:title="Pencil" />
+    <item
+        android:id="@+id/action_cloud"
+        android:icon="@drawable/cloud"
+        android:title="Cloud" />
+    <item
+        android:id="@+id/action_graph"
+        android:icon="@drawable/graph"
+        android:title="Connections" />
+    <item
+        android:id="@+id/action_calendar"
+        android:icon="@drawable/calendar"
+        android:title="Calendar" />
+</menu>

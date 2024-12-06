@@ -3,11 +3,14 @@ package com.example.somnigraph.WordCloud;
 import android.app.Activity;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 import android.widget.FrameLayout;
 import android.widget.AdapterView;
 import android.view.View;
 
+
+import androidx.core.content.ContextCompat;
 
 import com.example.somnigraph.Common;
 import com.example.somnigraph.Dream;
@@ -71,13 +74,27 @@ public class WordCloudActivity extends Activity {
         List<Dream> dreams = dreamManager.getDreamsWithTag(selectedTag);
         Map<String, Integer> wordFrequency = processDreamDescriptions(dreams);
         List<WordCloudItem> wordCloudItems = createWordCloudItems(wordFrequency);
-        wordCloudView.setWords(wordCloudItems);
+
+        Spinner tagSpinner = findViewById(R.id.connectionSpinner);
+        ArrayAdapter<String> adapter = (ArrayAdapter<String>) tagSpinner.getAdapter();
+
+        if (wordCloudItems.isEmpty()) {
+            // Remove the selected tag if no words are found
+            adapter.remove(selectedTag);
+            adapter.notifyDataSetChanged();
+
+            // Clear the word cloud
+            wordCloudView.clearWords();
+        } else {
+            // Update the word cloud with the new items
+            wordCloudView.setWords(wordCloudItems);
+        }
     }
     /**
      * processDreamDescriptions takes in a list of dreams and returns a map of the frequency of the words
      *
      */
-    private Map<String, Integer> processDreamDescriptions(List<Dream> dreams) {
+    public Map<String, Integer> processDreamDescriptions(List<Dream> dreams) {
         Map<String, Integer> wordFrequency = new HashMap<>();
         Pattern wordPattern = Pattern.compile("\\b\\w+\\b");
 
@@ -118,8 +135,8 @@ public class WordCloudActivity extends Activity {
                     entry.getValue(),
                     minFreq,
                     maxFreq,
-                    30,  // Minimum text size
-                    100   // Maximum text size
+                    60,  // Minimum text size
+                    140   // Maximum text size
             );
 
             items.add(new WordCloudItem(
@@ -140,11 +157,16 @@ public class WordCloudActivity extends Activity {
     }
 
     private int getColorForFrequency(int freq, int minFreq, int maxFreq) {
-        // Get color from your resources based on frequency
-        // Using your purple theme colors
-        float scale = (freq - minFreq) / (float)(maxFreq - minFreq);
-        int darkPurple = getResources().getColor(R.color.dark_purple);
-        int purple = getResources().getColor(R.color.purple);
+        // Handle edge case where minFreq == maxFreq
+        if (minFreq == maxFreq) {
+            return ContextCompat.getColor(this, R.color.purple); // Use ContextCompat
+        }
+
+        float scale = (freq - minFreq) / (float) (maxFreq - minFreq);
+        scale = Math.max(0, Math.min(scale, 1)); // Clamp scale between 0 and 1
+
+        int darkPurple = ContextCompat.getColor(this, R.color.dark_purple); // Use ContextCompat
+        int purple = ContextCompat.getColor(this, R.color.purple); // Use ContextCompat
 
         return blendColors(purple, darkPurple, scale);
     }

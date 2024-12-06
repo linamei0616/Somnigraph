@@ -59,7 +59,7 @@ public class DreamGraphView extends LinearLayout {
         removeAllViews();
 
         TextView titleView = new TextView(context);
-        titleView.setText(groupName);
+        titleView.setText(DreamManager.getEmojiTag(groupName));
         titleView.setTextSize(20);
         titleView.setTypeface(null, Typeface.BOLD);
         titleView.setTextColor(getResources().getColor(R.color.dark_purple));

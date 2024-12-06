@@ -67,11 +67,13 @@ public class CalendarWeekActivity extends Activity {
                 // Add dream details to the content
                 dreamsContent.append(dream.getDate()).append("\n");
                 dreamsContent.append(dream.getContent()).append("\n");
-                dreamsContent.append("Tags: ").append(dream.getTagsAsString()).append("\n\n");
+//                dreamsContent.append("Tags: ").append(dream.getTagsAsString()).append("\n\n");
+                dreamsContent.append("Tags: ").append(dream.getTagsWithEmojiAsString()).append("\n\n");
 
                 // Add tags to the HorizontalScrollView (tagContainer)
                 for (String tag : dream.tags) {
-                    addTagToContainer(tagContainer, tag);
+//                    addTagToContainer(tagContainer,tag);
+                    addTagToContainer(tagContainer, DreamManager.getEmojiTag(tag));
                 }
             }
         }
