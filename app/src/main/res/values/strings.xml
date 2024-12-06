@@ -15,6 +15,14 @@
     <string name="next">Next</string>
     <string name="previous">Previous</string>
 
+    <string name="view_prompt">View</string>
+    <string-array name="view_options">
+        <item>Day</item>
+        <item>Week</item>
+        <item>Month</item>
+        <item>Timeline</item>
+    </string-array>
+
     <string name="lorem_ipsum">
         Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam in scelerisque sem. Mauris
         volutpat, dolor id interdum ullamcorper, risus dolor egestas lectus, sit amet mattis purus
