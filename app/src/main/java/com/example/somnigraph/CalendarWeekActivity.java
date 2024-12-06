@@ -260,17 +260,17 @@ public class CalendarWeekActivity extends Activity {
                             finish();
                         }
                         break;
-                    case 1: // Day view
-                        Intent dayIntent = new Intent(CalendarWeekActivity.this, CalendarDayActivity.class);
-                        startActivity(dayIntent);
-                        finish();
-                        break;
-                    case 2: // Month view
+//                    case 1: // Day view
+//                        Intent dayIntent = new Intent(CalendarWeekActivity.this, CalendarDayActivity.class);
+//                        startActivity(dayIntent);
+//                        finish();
+//                        break;
+                    case 1: // Month view
                         Intent monthIntent = new Intent(CalendarWeekActivity.this, CalendarMonthActivity.class);
                         startActivity(monthIntent);
                         finish();
                         break;
-                    case 3: // Timeline view
+                    case 2: // Timeline view
                         Intent timelineIntent = new Intent(CalendarWeekActivity.this, CalendarTimeLineActivity.class);
                         startActivity(timelineIntent);
                         finish();

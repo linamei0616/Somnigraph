@@ -55,7 +55,7 @@ public class CalendarTimeLineActivity extends Activity {
         );
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         sortBySpinner.setAdapter(adapter);
-        sortBySpinner.setSelection(3);
+        sortBySpinner.setSelection(2);
 
         sortBySpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -66,17 +66,17 @@ public class CalendarTimeLineActivity extends Activity {
                         startActivity(weekIntent);
                         finish();
                         break;
-                    case 1: // Day view
-                        Intent dayIntent = new Intent(CalendarTimeLineActivity.this, CalendarDayActivity.class);
-                        startActivity(dayIntent);
-                        finish();
-                        break;
-                    case 2: // Month view
+//                    case 1: // Day view
+//                        Intent dayIntent = new Intent(CalendarTimeLineActivity.this, CalendarDayActivity.class);
+//                        startActivity(dayIntent);
+//                        finish();
+//                        break;
+                    case 1: // Month view
                         Intent monthIntent = new Intent(CalendarTimeLineActivity.this, CalendarMonthActivity.class);
                         startActivity(monthIntent);
                         finish();
                         break;
-                    case 3: // Timeline view
+                    case 2: // Timeline view
                         if (!(CalendarTimeLineActivity.this instanceof CalendarTimeLineActivity)) {
                             Intent timelineIntent = new Intent(CalendarTimeLineActivity.this, CalendarTimeLineActivity.class);
                             startActivity(timelineIntent);
