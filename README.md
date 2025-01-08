@@ -6,7 +6,7 @@ This is an android app for Dream Pattern Recognition and Analysis. **View projec
 **Final Presentation Canva Link:**
 [Canva Link](https://www.canva.com/design/DAGY3XdqtlI/rrr4u3XvLTp7jKURRd8LZQ/edit?utm_content=DAGY3XdqtlI&utm_campaign=designshare&utm_medium=link2&utm_source=sharebutton)
 
-This project was part of CS465 User Interface at UIUC. App is functionally with emulator on local servers.  
+This project was part of CS465 User Interface at UIUC. App is fully functional with emulator on local servers.  
 _Last updated: 1/8/25_
 
 </br>
